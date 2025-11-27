@@ -1,3 +1,5 @@
+// -------------------------------------------------------------------------- 1 -------------------------------------------------------------------------- 
+
 // This is the register user API 
 // Q. Where it will be used in frontend ?
 // Ans. When pop up will open to enter the information of the user before proceeding qarz e hasana application 
@@ -36,7 +38,9 @@ export const registerUser =  async (req , res) => {
         return res.status(201).json({
             message: "User registered successfully!" ,
             success: true,
-            newUser
+            userId: newUser._id,
+            Email: newUser.Email,
+            CNIC: newUser.CNIC
         })
 
     }
@@ -51,3 +55,5 @@ export const registerUser =  async (req , res) => {
 
     }
 }
+
+// 
