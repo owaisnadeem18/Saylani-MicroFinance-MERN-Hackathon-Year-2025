@@ -61,10 +61,3 @@ export const registerUser =  async (req , res) => {
 
     }
 }
-
-// -------------------------------------------------------------------------- 2 -------------------------------------------------------------------------- 
-
-// Apply for loan (category: Qarz e Hasana) API
-// Q. Where it will be used in frontend ?
-// Ans. After user registration, when user will apply for qarz e hasana loan application (form data of frontend will be sent to this API)
-

@@ -1,6 +1,8 @@
 import express from "express"
 import dotenv from "dotenv"
 import { connectDB } from "./config/db.js"
+import userRoutes from "./routes/User.routes.js"
+import loanRoutes from "./routes/Loan.routes.js"
 
 const app = express() 
 
@@ -8,6 +10,14 @@ const PORT = 5000
 
 dotenv.config()
 connectDB()
+
+// Now , import Routes here :
+
+app.use(express.json())
+
+app.use("/api/user" , userRoutes)
+app.use("/api/loan" , loanRoutes)
+
 
 app.get(("/") , (req , res) => {
     res.send("Initialized the project")
