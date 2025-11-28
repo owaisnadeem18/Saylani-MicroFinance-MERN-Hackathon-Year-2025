@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-export const loanSchema = mongoose.Schema({
+const loanSchema = mongoose.Schema({
   userId: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
   category: { type: String, required: true },
   subcategory: { type: String, required: true },
