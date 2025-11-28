@@ -3,6 +3,8 @@ import dotenv from "dotenv"
 import { connectDB } from "./config/db.js"
 import userRoutes from "./routes/User.routes.js"
 import loanRoutes from "./routes/Loan.routes.js"
+import guarantorRoutes from "./routes/Guarantor.routes.js"
+import adminRoutes from "./routes/Admin.routes.js"
 
 const app = express() 
 
@@ -17,7 +19,8 @@ app.use(express.json())
 
 app.use("/api/user" , userRoutes)
 app.use("/api/loan" , loanRoutes)
-
+app.use("/api/guarantor" , guarantorRoutes)
+app.use("/api/update" , adminRoutes)
 
 app.get(("/") , (req , res) => {
     res.send("Initialized the project")

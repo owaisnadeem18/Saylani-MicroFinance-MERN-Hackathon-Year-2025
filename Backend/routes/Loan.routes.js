@@ -1,5 +1,5 @@
 import express from "express"
-import { applyForLoan } from "../controllers/Loan.controller"
+import { applyForLoan } from "../controllers/Loan.controller.js"
 
 const router = express.Router()
 

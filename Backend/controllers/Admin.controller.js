@@ -18,8 +18,6 @@ export const getAllLoans = async (req , res) => {
 
         const loans = await Loan.find().sort({createdAt: -1})
 
-
-
         if (loans.length == 0) {
             return res.status(200).json({
                 success: true ,

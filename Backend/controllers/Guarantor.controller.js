@@ -2,8 +2,8 @@
 // Question. Where we will use this one in our frontend application: 
 // Ans. When user will apply for loan , another form will open to collect the info about two of the guarantors:
 
-import Guarantor from "../models/Guarantor.model"
-import Loan from "../models/Loan.model"
+import Guarantor from "../models/Guarantor.model.js"
+import Loan from "../models/Loan.model.js"
 
 // two gurantors info: 
 
