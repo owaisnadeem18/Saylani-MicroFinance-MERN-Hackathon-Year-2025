@@ -4,7 +4,7 @@
 // Q. Where it will be used in frontend ?
 // Ans. When pop up will open to enter the information of the user before proceeding qarz e hasana application 
 
-import User from "../models/User.model"
+import User from "../models/User.model.js"
 export const registerUser =  async (req , res) => {
 
     try {

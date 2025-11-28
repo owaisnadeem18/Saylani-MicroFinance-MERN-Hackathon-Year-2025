@@ -2,8 +2,8 @@
 // Where it will be used in frontend ?
 // After user registration, when user will apply for qarz e hasana loan application (form data of frontend will be sent to this API)
 
-import Loan from "../models/Loan.model";
-import User from "../models/User.model";
+import Loan from "../models/Loan.model.js";
+import User from "../models/User.model.js";
 
 export const applyForLoan = async (req, res) => {
   try {
