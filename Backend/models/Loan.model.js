@@ -19,7 +19,7 @@ const loanSchema = mongoose.Schema({
       type: String,
     },
   },
-});
+}, {timestamps: true} );
 
 const Loan = mongoose.model("Loan", loanSchema);
 export default Loan;
