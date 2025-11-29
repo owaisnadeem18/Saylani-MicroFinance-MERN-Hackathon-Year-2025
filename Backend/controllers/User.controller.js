@@ -6,6 +6,8 @@
 
 import User from "../models/User.model.js";
 import { sendEmail } from "../utils/sendEmail.js";
+import bcrypt, { getRounds } from "bcrypt"
+
 export const registerUser = async (req, res) => {
   try {
     const { Name, Email, CNIC } = req.body;
@@ -31,13 +33,16 @@ export const registerUser = async (req, res) => {
     // generate a random password , which backend will send to the user on it's email after successfull registration:
     const password = Math.random().toString(36).substring(2, 8);
 
+    // For more security save this password in DB after hashing it:
+    const hashedPassword = await bcrypt.hash(password , 10)
+
     // If User does not exist, then register a new user in DB
 
     const newUser = await User.create({
       Name,
       Email,
       CNIC,
-      Password: password,
+      Password: hashedPassword,
     });
 
     // official email message:

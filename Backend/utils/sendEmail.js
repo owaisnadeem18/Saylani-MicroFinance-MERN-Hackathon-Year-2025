@@ -21,6 +21,6 @@ export const sendEmail = async (to , subject , text) => {
 
     }
     catch (err) {
-        
+        console.log("Error sending the mail is : " , err.message)
     }
 }
