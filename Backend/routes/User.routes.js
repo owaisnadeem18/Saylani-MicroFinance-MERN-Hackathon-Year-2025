@@ -8,3 +8,5 @@ const router = express.Router()
 
 // route # 01 of User Registration API:
 router.post("/register" , registerUser)
+
+export default router

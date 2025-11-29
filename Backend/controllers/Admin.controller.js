@@ -8,7 +8,7 @@
 
 // Get all loans (Get Request)
 
-import Loan from "../models/Loan.model";
+import Loan from "../models/Loan.model.js";
 
 export const getAllLoans = async (req , res) => {
   
