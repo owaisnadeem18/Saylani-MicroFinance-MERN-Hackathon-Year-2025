@@ -2,7 +2,7 @@
 
 // 1️⃣ Get all loan applications (for admin view)
 // 2️⃣ Update the status of a loan application (approve or reject)
-
+// 3️⃣ QR code generation for loan applications (optional)
 
 // ----------------------------------------------------------------------- 1 ---------------------------------------------------------------------
 
@@ -98,4 +98,41 @@ export const updateStatus = async (req , res) => {
             error: err.message
         })
     }
+}
+
+export const generateQRcode = async (req , res) => {
+    
+    try {
+
+        // 1. get the id from route params: 
+        const loanId = req.params.id
+        
+        // QR code generation logic will go here
+        
+        // 2. first find that specific loan application with the help of it's specific id
+
+        const loan = await Loan.findById(loanId)
+
+        if (!loan) {
+            return res.status(404).json({
+                message: "Loan Application Not Found",
+                success: false,
+            })
+        }
+
+        // 3. Now , we have to assign the token # with respect to the application of loan: 
+
+        const tokenNumber = await Loan.fin
+
+
+    }
+
+    catch (err) {
+        return res.status(500).json({
+            message: "Internal Server Error" ,
+            success: false,
+            error: err.message
+        })
+    }
+
 }
