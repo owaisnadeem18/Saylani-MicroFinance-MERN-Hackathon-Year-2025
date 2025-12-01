@@ -5,6 +5,8 @@
 import Loan from "../models/Loan.model.js";
 import User from "../models/User.model.js";
 
+// ------------------------------------- 01 --------------------------------------
+// Request # 01 for the user to apply for loan 
 export const applyForLoan = async (req, res) => {
   try {
     const { userId, category, subcategory, loanAmount, loanPeriod } = req.body;
@@ -61,3 +63,50 @@ export const applyForLoan = async (req, res) => {
     });
   }
 };
+
+
+// ------------------------------------- 02 --------------------------------------
+
+// Request # 02 (Get request) for the user to see all the loan applications and their status
+
+export const getUserLoanRequests = async (req , res) => {
+  
+  try {
+
+    // 1. First, we have to get the user to show him all of the requests that the user has applied so far: 
+
+    const { userId } = req.params;
+
+    if (!userId) {
+      return res.status(400).json({
+        message: "UserId is missing in the request parameters",
+        success: false
+      })
+    }
+    
+    // 2. Find the all loan applications user has applied so far: 
+    
+    const totalLoanApplications = await Loan.find({userId})
+    
+    if (totalLoanApplications.length <= 0) {
+      return res.status(200).json({
+        message: "User did not apply for any loan so far.",
+        success: true
+      })
+    } 
+
+    return res.status(200).json({
+      totalLoanApplications,
+      success: true
+    })
+  }
+  
+  catch (err) {
+    return res.status(500).json({
+      message: "Internal Server Error",
+      success: false,
+      error: err.message
+    })
+  }
+
+}
