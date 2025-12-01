@@ -8,7 +8,8 @@ import Loan from "../models/Loan.model.js"
 // two gurantors info: 
 
 export const guarantorsInfo = async (req , res) => {
-    
+
+
     try {
 
         // First, we have to take loanId and guarantors array (as we are required to save info of two guarantors at a time)

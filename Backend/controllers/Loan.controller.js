@@ -77,9 +77,24 @@ export const getUserLoanRequests = async (req , res) => {
 
     const { userId } = req.params;
 
+    console.log("userId is => " , userId)
+
     if (!userId) {
       return res.status(400).json({
         message: "UserId is missing in the request parameters",
+        success: false
+      })
+    }
+
+    // Now, check either user exists with this id or not: So,
+
+    const userExists = await User.find({userId})
+
+    console.log("userExists => " , userExists)
+
+    if (!userExists) {
+      return res.status(404).json({
+        message: "User does not exist",
         success: false
       })
     }
@@ -87,6 +102,8 @@ export const getUserLoanRequests = async (req , res) => {
     // 2. Find the all loan applications user has applied so far: 
     
     const totalLoanApplications = await Loan.find({userId})
+
+    console.log("totalLoanApplications => " , totalLoanApplications)
     
     if (totalLoanApplications.length <= 0) {
       return res.status(200).json({
@@ -102,6 +119,7 @@ export const getUserLoanRequests = async (req , res) => {
   }
   
   catch (err) {
+
     return res.status(500).json({
       message: "Internal Server Error",
       success: false,

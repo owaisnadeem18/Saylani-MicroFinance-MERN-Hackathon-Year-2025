@@ -20,7 +20,7 @@ app.use(express.json())
 app.use("/api/user" , userRoutes)
 app.use("/api/loan" , loanRoutes)
 app.use("/api/guarantor" , guarantorRoutes)
-app.use("/api/update" , adminRoutes)
+app.use("/api/admin" , adminRoutes)
 
 app.get(("/") , (req , res) => {
     res.send("Initialized the project")

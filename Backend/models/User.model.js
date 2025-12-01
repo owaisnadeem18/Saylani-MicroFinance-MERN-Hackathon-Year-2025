@@ -5,6 +5,7 @@ const userSchema = mongoose.Schema({
     CNIC: {type: String , required: true , unique : true},
     Email : {type: String , required: true , unique: true},
     Password: {type: String , required: true} ,
+    role: {type: String , enum: ["admin" , "user" ] , default: "user" } ,
     DateCreated : {type: Date , default: Date.now}
 })
 
