@@ -1,0 +1,20 @@
+@import "tailwindcss";
+.nav-underline {
+  position: relative;
+  display: inline-block;
+}
+
+.nav-underline::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -2px; /* slightly below text */
+  width: 0%;
+  height: 2px;
+  background-color: #2563EB; /* Tailwind sky-500 */
+  transition: width 0.3s ease;
+}
+
+.nav-underline:hover::after {
+  width: 80%;
+}
