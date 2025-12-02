@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Header from "./components/Header";
+import HeroSection from "./components/HeroSection";
 
 function App() {
   const isLoggedIn = false;
@@ -14,6 +15,9 @@ function App() {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/dashboard" element={<Dashboard />} />
       </Routes> */}
+
+      <HeroSection />
+
     </Router>
   );
 }

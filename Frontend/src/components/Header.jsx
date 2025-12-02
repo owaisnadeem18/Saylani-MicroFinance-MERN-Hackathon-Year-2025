@@ -112,7 +112,7 @@ export default function Header() {
                 className="block rounded-lg px-3 py-2 text-base font-semibold text-gray-900 hover:bg-gray-50"
               >
                 Login
-              </NavLink> 
+              </NavLink>
             </div>
           </div>       
         </DialogPanel>

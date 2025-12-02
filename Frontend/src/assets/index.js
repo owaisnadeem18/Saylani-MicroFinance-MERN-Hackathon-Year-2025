@@ -1,5 +1,7 @@
-import saylaniLogo from "../assets/images/saylani_full_logo.png"
+import saylaniLogo from "../assets/images/saylani-full-logo.png"
+import heroImage from "../assets/images/hero-section-image.jpg"
 
 export {
-    saylaniLogo
+    saylaniLogo,
+    heroImage
 }
