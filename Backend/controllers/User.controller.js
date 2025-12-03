@@ -1,14 +1,20 @@
 // -------------------------------------------------------------------------- 1 --------------------------------------------------------------------------
 
-// This is the register user API
-// Q. Where it will be used in frontend ?
-// Ans. When pop up will open to enter the information of the user before proceeding qarz e hasana application
 
 import User from "../models/User.model.js";
 import { generateRandomPassword } from "../utils/generateRandomPass.js";
 import { sendEmail } from "../utils/sendEmail.js";
 import jwt from "jsonwebtoken"
 import bcrypt from "bcrypt"
+
+// --------------------------------------------------------------------------- 1 --------------------------------------------------------------------------
+
+// *********Api to register user:*********
+
+
+// This is the register user API
+// Q. Where it will be used in frontend ?
+// Ans. When pop up will open to enter the information of the user before proceeding qarz e hasana application
 
 export const registerUser = async (req, res) => {
   try {
@@ -135,6 +141,9 @@ Saylani Welfare Qarz-e-Hasana Team`;
   }
 };
 
+// -------------------------------------------------------------------------- 2 --------------------------------------------------------------------------
+
+// *********Api to login user:********* 
 // Now , it's time to login the user , so that he can enter his details: 
 
 export const loginUser = async (req , res) => {
@@ -212,5 +221,57 @@ export const loginUser = async (req , res) => {
       error: err.message
     })
   }
+
+}
+
+// -------------------------------------------------------------------------- 3 --------------------------------------------------------------------------
+
+// *********Api to get user details:*********
+
+// After login , we need to get the details of the specific user . So, now we will create an api for that:
+
+export const getUserDetails = async (req , res) => {
+  
+  try {
+    const { userId } = req.params
+
+    console.log(userId)
+
+    // If, there is no user Id send , then we need to show error: 
+    
+    if (!userId) {
+      return res.status(404).json({
+        message: "UserId Not Found! ",
+        success: false
+      })
+    }
+
+    // Now , we need to fetch the user details based on this UserId , password should not be fetched because it's confidential:
+    const user = await User.findById(userId).select("-Password -__v")
+
+    if (!user) {
+      return res.status(404).json({
+        message: "User Not Found ! ",
+        success: false
+      })
+    }
+
+    // Send User details as response: 
+
+    return res.status(200).json({
+      success: true ,
+      user
+    })
+    
+  } 
+
+
+  catch (err) {
+    return res.status(500).json({
+      message: "Internal Server Error ! ",
+      success: false
+    })
+  }
+
 
 }
