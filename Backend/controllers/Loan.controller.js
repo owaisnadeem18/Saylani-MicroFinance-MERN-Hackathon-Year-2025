@@ -97,7 +97,7 @@ export const getUserLoanRequests = async (req , res) => {
         message: "User does not exist",
         success: false
       })
-    }
+    }          
     
     // 2. Find the all loan applications user has applied so far: 
     
@@ -119,7 +119,6 @@ export const getUserLoanRequests = async (req , res) => {
   }
   
   catch (err) {
-
     return res.status(500).json({
       message: "Internal Server Error",
       success: false,

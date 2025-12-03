@@ -1,8 +1,7 @@
 import express from "express"
 
 // Now , import Controller functions from User.controller.js file:
-import { loginUser, registerUser } from "../controllers/User.controller.js"
-
+import { getUserDetails, loginUser, registerUser, updateUserPassword } from "../controllers/User.controller.js"
 
 const router = express.Router()
 
@@ -12,4 +11,10 @@ router.post("/register" , registerUser)
 // route # 02 of User Login: 
 router.post("/login" , loginUser)
 
-export default router
+// route # 03 of user details fetching will be here:
+router.get("/:userId" , getUserDetails)
+
+// route # 04 of updating user password API:
+router.put("/:userId/change-password" , updateUserPassword)
+
+export default router                   
