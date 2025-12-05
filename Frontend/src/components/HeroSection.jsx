@@ -35,10 +35,10 @@ const HeroSection = () => {
             <p className="text-sm text-gray-600">— صحیح مسلم</p>
           </div>
 
-          <Button >
+          <Button className = "cursor-pointer" >
             Apply for Qarz-e-Hasana
           </Button>
-
+          
         </div>
 
         {/* Right Image */}
