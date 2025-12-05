@@ -15,5 +15,6 @@ router.put("/loans/:id/status" , authMiddleware , adminMiddleware , updateStatus
 
 // ----------------------------------------------------------------------------------------- 3 ----------------------------------------------------------------------------
 router.post("/loans/:id/qrcode" , authMiddleware , adminMiddleware , generateQRcode)
-
-export default router
+                                                                              
+export default router    
+                               

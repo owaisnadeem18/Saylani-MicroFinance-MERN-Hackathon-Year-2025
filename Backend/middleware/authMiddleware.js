@@ -4,15 +4,14 @@ import User from "../models/User.model.js";
 export const authMiddleware = async (req , res , next) => {
 
     try {
-        
+
   let token;
-    
+
    // Check if Authorization header exists and starts with "Bearer"
   
    if (req.headers.authorization && req.headers.authorization.startsWith("Bearer")) {
         // Extract token from header
         token = req.headers.authorization.split(" ")[1]
-        console.log("Token is => " , token)
    }
 
     //  If there is no token deny access: 
@@ -28,11 +27,10 @@ export const authMiddleware = async (req , res , next) => {
 
     const decoded = jwt.verify(token , process.env.JWT_SECRET)
 
-    console.log("Decoded user info from token is => " , decoded)
 
     // find the user from the db with token: 
 
-    const user = await User.findById(decoded.id).select("-password")
+    const user = await User.findById(decoded.userId).select("-Password")
 
       if (!user) {
       return res.status(401).json({
@@ -40,8 +38,6 @@ export const authMiddleware = async (req , res , next) => {
         message: "Not authorized, user not found",
       });
     }
-
-    console.log("User is => " , user)
 
     req.user = user;
 
