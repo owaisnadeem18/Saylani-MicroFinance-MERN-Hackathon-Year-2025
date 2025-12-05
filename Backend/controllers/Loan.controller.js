@@ -126,8 +126,8 @@ export const getUserLoanRequests = async (req , res) => {
       })
     }          
     
-    // 2. Find the all loan applications user has applied so far: 
-    
+    // 2. Find the all loan applications user has applied so far:  
+     
     const totalLoanApplications = await Loan.find({userId})
 
     console.log("totalLoanApplications => " , totalLoanApplications)
@@ -136,7 +136,7 @@ export const getUserLoanRequests = async (req , res) => {
       return res.status(200).json({
         message: "User did not apply for any loan so far.",
         success: true
-      })
+      }) 
     } 
 
     return res.status(200).json({

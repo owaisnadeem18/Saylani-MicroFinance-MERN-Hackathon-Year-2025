@@ -13,7 +13,7 @@ import bcrypt from "bcrypt";
 // This is the register user API
 // Q. Where it will be used in frontend ?
 // Ans. When pop up will open to enter the information of the user before proceeding qarz e hasana application
-
+                                                          
 export const registerUser = async (req, res) => {
   try {
     const { Name, Email, CNIC } = req.body;
@@ -149,7 +149,7 @@ export const loginUser = async (req, res) => {
       return res.status(404).json({
         success: false,
         message: "Email is missing !",
-      });
+      });     
     }
 
     if (!Password) {
