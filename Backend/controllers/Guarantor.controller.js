@@ -39,10 +39,10 @@ export const guarantorsInfo = async (req , res) => {
         // 3. Guarantor array info (validate both of the guarantors have all required fields) -> Use for of loop to iterate the array
 
         for (let guarantor of guarantors) {
-            if (!guarantor.Name || !guarantor.CNIC || !guarantor.Email || !guarantor.Address) {
+            if (!guarantor.Name || !guarantor.CNIC || !guarantor.Email || !guarantor.Address || !guarantor.Phone) {
                 return res.status(400).json({
                     success: false,
-                    message: "All fields (Name, CNIC, Email, Address) are required for each guarantor"
+                    message: "All fields (Name, CNIC, Email, Address & Phone Number) are required for each guarantor"
                 })
             }
         }
@@ -55,7 +55,8 @@ export const guarantorsInfo = async (req , res) => {
                 Name:guarantor.Name,
                 CNIC: guarantor.CNIC,
                 Email: guarantor.Email,
-                Address: guarantor.Address
+                Address: guarantor.Address,
+                Phone: guarantor.Phone
             }))        
         )
 
