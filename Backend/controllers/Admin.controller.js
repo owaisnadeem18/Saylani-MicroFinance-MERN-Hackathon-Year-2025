@@ -16,7 +16,7 @@ export const getAllLoans = async (req, res) => {
   try {
     // We have to get all the loans whose are present in the DB:
 
-    const loans = await Loan.find().sort({ createdAt: -1 });
+    const loans = await Loan.find().sort({ createdAt: -1 }).populate("userId" , "Name Email CNIC").lean;
 
     if (loans.length == 0) {
       return res.status(200).json({
@@ -48,6 +48,8 @@ export const updateStatus = async (req, res) => {
     const loanId = req.params.id;
 
     const { status } = req.body;
+
+
 
     // 2. Validation Steps:
     if (!status || !["approved", "rejected"].includes(status.toLowerCase())) {
@@ -93,14 +95,12 @@ export const updateStatus = async (req, res) => {
 
 //  ----------------------------------------------------------------------- 3 ---------------------------------------------------------------------
 
-// API # 03 to generate QR code for loan application
+// API # 03 to generate QR code for loan application (We have added QR related things in the database , so we can get the data from loan.model.js)
 
 export const generateQRcode = async (req, res) => {
   try {
     // 1. get the id from route params:
     const loanId = req.params.id;
-
-    // QR code generation logic will go here
 
     // 2. first find that specific loan application with the help of it's specific id
 
@@ -113,29 +113,43 @@ export const generateQRcode = async (req, res) => {
       });
     }
 
-    // 3. Now , we have to assign the unique token # with respect to the application of loan (this is required to generate QR code):
+    // 3. Now , we have to check , either the QR of this specific loan is already existed in the DB or not:
 
-    const lastQR = await QR.findOne().sort({ tokenNumber: -1 }); // get last token
+    const existingQR = await QR.findOne({loanId})
 
-    const tokenNumber = lastQR.tokenNumber ? lastQR.tokenNumber + 1 : 1;
+    // If the QR code is already generated, then we can simply use this one and will store in QR model:
 
-    const Qrdata = `LoanId ${loanId}, Token ${tokenNumber}`;
-    const QrCodeImage = await QRCode.toDataURL(Qrdata);
+    if (existingQR) {
+      return res.status(200).json({
+        success: true ,
+        message: "QR code for this specific loan , has already been generated.",
+        loanId: loan._id ,
+        tokenNumber: existingQR.tokenNumber,
+        QRCodeImage: existingQR.QRCodeImage ,
+        appointment: existingQR.appointment
+      })
+    }
+     
+    // Generate QR code data , if it's not already present: 
 
-    // Optional: assign appointment:
+    const tokenNumber = loan.tokenNumber 
 
-    const appointment = {
+    const appointment = loan.appointment || {
       date: new Date(), // today
-      time: "10:00 AM",
-      officeLocation: "Saylani Welfare Head Office Bahadurabad",
-    };
+      time: "10:00",
+      officeLocation: "Saylani Welfare Head Office Bahadurabad",      
+    }
 
-    // save to QR Collection:
+    const qrPayload = `LoanId: ${loanId}\nToken: ${tokenNumber}\nAppointment: ${appointment.date.toLocaleDateString()} at ${appointment.time}`;
+    
+    const qrCodeImage = await QRCode.toDataURL(qrPayload);
 
-    const newQR = await QR.create({
+    // Save QR to DB
+
+    await QR.create({
       loanId,
       tokenNumber,
-      QrCodeImage: QrCodeImage,
+      QRCodeImage: qrCodeImage,
       appointment,
     });
 
@@ -144,14 +158,17 @@ export const generateQRcode = async (req, res) => {
       success: true,
       loanId: loan._id,
       tokenNumber,
-      QRCodeImage: QrCodeImage,
+      QRCodeImage: qrCodeImage,
       appointment,
     });
-  } catch (err) {
+  }
+  
+  catch (err) {
     return res.status(500).json({
       message: "Internal Server Error",
       success: false,
       error: err.message,
     });
   }
+
 };

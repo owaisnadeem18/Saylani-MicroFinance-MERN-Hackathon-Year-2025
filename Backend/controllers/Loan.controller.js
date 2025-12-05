@@ -114,10 +114,12 @@ export const getUserLoanRequests = async (req , res) => {
     // Now, check either user exists with this id or not: So,
 
     const userExists = await User.find({userId})
-                    
-    console.log("userExists => " , userExists)
 
-    if (!userExists) {
+    const verifyUserId = await User.findById(userId) 
+                    
+    console.log("userExists => " , verifyUserId)
+
+    if (!verifyUserId) {
       return res.status(404).json({
         message: "User does not exist",
         success: false

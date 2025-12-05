@@ -4,7 +4,6 @@ const QRSchema = mongoose.Schema({
     loanId: {type: mongoose.Schema.ObjectId , ref: "Loan" , required: true} , 
     tokenNumber: {type: Number , required: true , unique: true} ,
     QRCodeImage: {type: String , required: true},
-    createdAt: {type: Date , default: Date.now},
     appointment: {
         date: {
             type: Date,
@@ -16,7 +15,7 @@ const QRSchema = mongoose.Schema({
             type: String,
         }
     }
-})
+} , { timestamps: true } )
 
 const QR = mongoose.model("QR" , QRSchema)
 
