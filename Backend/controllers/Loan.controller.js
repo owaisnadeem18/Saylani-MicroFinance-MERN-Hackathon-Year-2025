@@ -4,6 +4,7 @@
 
 import Loan from "../models/Loan.model.js";
 import User from "../models/User.model.js";
+import QRCode from "qrcode";
 
 // ------------------------------------- 01 --------------------------------------
 // Request # 01 for the user to apply for loan 
@@ -37,8 +38,27 @@ export const applyForLoan = async (req, res) => {
 
     const totalLoanApplications = await Loan.countDocuments();
     const token = totalLoanApplications + 1;
+    
+    // 3(b). Auto-generate appointment details
+    // Appointment = after 2 days at 11:00 AM in Saylani office
 
-    // 3(b). Now , let's create a new loan application:
+    const appointmentDate = new Date()
+
+    appointmentDate.setDate(appointmentDate.getDate() + 2)
+
+    const appointment = {
+      date: appointmentDate,
+      time: "11:00am",
+      officeLocation: "Saylani Head Office, Bahadurabad, Karachi"
+    }
+
+    // 3(c). Generate QR code for the slip
+    // QR will contain token + appointment details
+
+    const qrPayload = `Token Number: ${token}\nCategory: ${category}\nSubcategory: ${subcategory}\nAppointment: ${appointmentDate.toDateString()} at ${appointment.time}`
+    const qrImage = await QRCode.toDataURL(qrPayload)
+
+    // 3(d). Now , let's create a new loan application in Database:
 
     const NewLoanApplication = await Loan.create({
       userId,
@@ -47,12 +67,18 @@ export const applyForLoan = async (req, res) => {
       loanAmount,
       loanPeriod,
       tokenNumber: token,
+      appointment: appointment
     });
 
+    // Send response to frontend: 
+
     return res.status(201).json({
+        success: true ,
         message: "Loan Application Submitted Successfully",
         loanId: NewLoanApplication._id,
-        tokenNumber: NewLoanApplication.tokenNumber
+        tokenNumber: NewLoanApplication.tokenNumber,
+        appointment: appointment,
+        qrImage: qrImage
     })
 
   } catch (err) {
@@ -63,7 +89,6 @@ export const applyForLoan = async (req, res) => {
     });
   }
 };
-
 
 // ------------------------------------- 02 --------------------------------------
 
@@ -89,7 +114,7 @@ export const getUserLoanRequests = async (req , res) => {
     // Now, check either user exists with this id or not: So,
 
     const userExists = await User.find({userId})
-
+                    
     console.log("userExists => " , userExists)
 
     if (!userExists) {

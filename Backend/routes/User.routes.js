@@ -17,4 +17,4 @@ router.get("/:userId" , getUserDetails)
 // route # 04 of updating user password API:
 router.put("/:userId/change-password" , updateUserPassword)
 
-export default router                   
+export default router
