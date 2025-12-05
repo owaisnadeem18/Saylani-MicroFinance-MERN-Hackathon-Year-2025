@@ -4,4 +4,4 @@ import heroImage from "../assets/images/hero-section-image.jpg"
 export {
     saylaniLogo,
     heroImage
-}
+}                                    
