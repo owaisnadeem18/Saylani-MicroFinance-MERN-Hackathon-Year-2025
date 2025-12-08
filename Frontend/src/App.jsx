@@ -4,6 +4,7 @@ import HeroSection from "./components/HeroSection";
 import LoanCardsContainer from "./components/LoanCardsContainer";
 import Footer from "./components/Footer";
 import ApplyForLoan from "./components/ApplyForLoan";
+import LoanCalculator from "./components/LoanCalculator";
 
 function App() {
   const isLoggedIn = false;
@@ -20,6 +21,7 @@ function App() {
             {/* Home Page components */}
             <HeroSection />
             <LoanCardsContainer/>
+            <LoanCalculator/>
           </>
 
         } />
@@ -27,6 +29,7 @@ function App() {
 
         <Route path="/loan-categories" element = {<LoanCardsContainer/>} />
         <Route path="/apply-for-loan" element = {<ApplyForLoan/>} />
+        <Route path="/loan-calculator" element = {<LoanCalculator/>} />
 
       </Routes>
 

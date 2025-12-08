@@ -10,6 +10,7 @@ import {
 import { Badge } from "./ui/badge";
 import { Button } from "./ui/button";
 import { Link } from "react-router-dom";
+import { scrollToTop } from "@/utils/scrollToTop";
 
 const LoanCard = ({ category, subcategories, description, maxLoan, loanPeriod }) => {
   return (
@@ -50,7 +51,7 @@ const LoanCard = ({ category, subcategories, description, maxLoan, loanPeriod })
 
       {/* Card Footer */}
       <CardFooter className="p-4 flex justify-center mt-auto">
-        <Link to="/apply-for-loan"> 
+        <Link onClick={() => scrollToTop()} to="/apply-for-loan"> 
             <Button className="bg-blue-600 hover:bg-blue-700 transition-colors text-white font-semibold px-6 py-2 rounded-full shadow-md cursor-pointer w-full sm:w-auto">
                 Apply Now
             </Button>

@@ -19,7 +19,7 @@ export default function Header() {
 
   const navItems = [
     { name: "Home", path: "/" },
-    { name: "Calculator", path: "/calculator" },
+    { name: "Calculator", path: "/loan-calculator" },
     // { name: "Apply Loan", path: "/apply-loan" },
     // { name: "Dashboard", path: "/dashboard" },
     // { name: "Admin", path: "/admin" },
@@ -53,7 +53,7 @@ export default function Header() {
               key={item.name}
               to={item.path}
               className={({ isActive }) =>
-                `text-sm font-semibold nav-underline ${isActive ? "text-blue-600 border-b-2 border-b-[#2563EB]" : "text-gray-900"}`
+                `text-sm font-semibold nav-underline ${isActive ? "text-blue-600 border-b-2 border-b-[#2563EB]" : "text-gray-900 "}`
               }
             >
               {item.name}

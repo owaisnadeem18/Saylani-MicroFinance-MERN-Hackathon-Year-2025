@@ -1,7 +1,9 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { Separator } from "@/components/ui/separator";
 import { Mail, Phone, MapPin, Facebook, Instagram, Linkedin } from "lucide-react";
+import { scrollToTop } from "@/utils/scrollToTop";
+import { footerLinks } from "@/data/footerQuickLinks";
 
 const Footer = () => {
   return (
@@ -19,9 +21,9 @@ const Footer = () => {
 
           {/* Socials */}
           <div className="flex items-center gap-4 mt-4">
-            <Link to={"https://www.facebook.com/SaylaniWelfareInternationalTrust/"} className="text-blue-600 hover:text-blue-800"><Facebook size={22} /></Link>
-            <Link to={"https://www.instagram.com/officialswit/?hl=en"} className="text-blue-600 hover:text-blue-800"><Instagram size={22} /></Link>
-            <Link to={"https://pk.linkedin.com/company/saylani-welfare-international-trust-official"} className="text-blue-600 hover:text-blue-800"><Linkedin size={22} /></Link>
+            <Link target="_blank" to={"https://www.facebook.com/SaylaniWelfareInternationalTrust/"} className="text-blue-600 hover:text-blue-800"><Facebook size={22} /></Link>
+            <Link target="_blank" to={"https://www.instagram.com/officialswit/?hl=en"} className="text-blue-600 hover:text-blue-800"><Instagram size={22} /></Link>
+            <Link target="_blank" to={"https://pk.linkedin.com/company/saylani-welfare-international-trust-official"} className="text-blue-600 hover:text-blue-800"><Linkedin size={22} /></Link>
           </div>
         </div>
 
@@ -29,9 +31,21 @@ const Footer = () => {
         <div>
           <h3 className="text-lg font-semibold text-blue-700 mb-3">Quick Links</h3>
           <ul className="grid gap-2 text-gray-700">
-            <li><Link className="hover:text-blue-600" to="/">Home</Link></li>
-            <li><Link className="hover:text-blue-600" to="/loan-categories">Loan Categories</Link></li>
-            <li><Link className="hover:text-blue-600" to="/apply-for-loan">Apply for Loan</Link></li>
+
+            {
+              footerLinks.map(item => <li><NavLink 
+              to = {item.path}
+              onClick = {() => scrollToTop()}  
+              className={({ isActive }) =>
+                `text-sm font-semibold nav-underline ${isActive ? "text-blue-600 border-b-2 border-b-[#2563EB]" : "text-gray-900 "}`
+              }                                   
+              >
+                {item.link}
+              </NavLink>
+              </li>)
+
+            }
+
           </ul>
         </div>
 
