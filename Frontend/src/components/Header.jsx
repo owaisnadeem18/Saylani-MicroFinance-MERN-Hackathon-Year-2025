@@ -20,25 +20,25 @@ export default function Header() {
   const navItems = [
     { name: "Home", path: "/" },
     { name: "Calculator", path: "/calculator" },
-    { name: "Apply Loan", path: "/apply-loan" },
-    { name: "Dashboard", path: "/dashboard" },
-    { name: "Admin", path: "/admin" },
+    // { name: "Apply Loan", path: "/apply-loan" },
+    // { name: "Dashboard", path: "/dashboard" },
+    // { name: "Admin", path: "/admin" },
   ];
 
   return (
     <header className="bg-white shadow-sm">
       <nav className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8">
-        {/* Logo */}
+        {/* Logo */}  
         <div className="flex lg:flex-1">
           <NavLink to="/" className="-m-1.5 p-1.5">
-            <img src={saylaniLogo} alt="Saylani Logo" className="h-10 w-auto" />
+            <img src={saylaniLogo} alt="Saylani Logo" className=" h-10 w-auto" />
           </NavLink>
         </div>
 
         {/* Mobile Button */}
         <div className="flex lg:hidden">
           <button
-            type="button"
+            type="button"  
             onClick={() => setMobileMenuOpen(true)}
             className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700"
           >
@@ -59,9 +59,9 @@ export default function Header() {
               {item.name}
             </NavLink>
           ))}
-        </PopoverGroup>
+        </PopoverGroup>                                             
 
-        {/* Login Button */}
+        {/* Login Button */}  
         <div className="hidden lg:flex lg:flex-1 lg:justify-end">
           <NavLink
             to="/login"

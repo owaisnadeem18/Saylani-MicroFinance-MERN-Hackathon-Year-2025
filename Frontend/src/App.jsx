@@ -10,13 +10,11 @@ function App() {
       {/* Header MUST be inside Router */}
       <Header isLoggedIn={isLoggedIn} />
 
-      {/* <Routes>
-        <Route path="/" element={<LandingPage />} />
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/dashboard" element={<Dashboard />} />
-      </Routes> */}
+    <Routes>
+        <Route path="/" element={<HeroSection />} />
+        {/* <Route path="/calculator" element={<Calculator />} /> */}
+    </Routes>
 
-      <HeroSection />
 
     </Router>
   );

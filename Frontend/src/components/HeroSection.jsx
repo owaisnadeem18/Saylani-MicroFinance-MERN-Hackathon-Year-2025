@@ -35,7 +35,7 @@ const HeroSection = () => {
             <p className="text-sm text-gray-600">— صحیح مسلم</p>
           </div>
 
-          <Button className = "cursor-pointer" >
+          <Button className = "cursor-pointer hover:bg-blue-800 transition duration-300" >
             Apply for Qarz-e-Hasana
           </Button>
           
