@@ -4,11 +4,11 @@ import { Button } from "./ui/button";
 
 const HeroSection = () => {
   return (
-    <div  >
-          <div className="container mx-auto max-w-7xl px-6 py-16 md:py-24">
+    <div className="min-h-[calc(100vh-88px)] flex justify-center items-center"  >
+          <div className="container mx-auto max-w-7xl px-6 py-8 lg:py-0">
       <div className="flex flex-col md:flex-row items-center gap-10">
 
-        {/* Left Content */}
+        {/* Left Content */} 
         <div className="flex-1 text-center md:text-left flex flex-col gap-5 sm:items-start">
           <h1 className="text-3xl md:text-5xl leading-15 sm:leading-20 font-bold text-gray-800">
             مَنْ ذَا الَّذِیْ یُقْرِضُ اللّٰهَ قَرْضًا حَسَنًا فَیُضٰعِفَهٗ لَهٗۤ اَضْعَافًا كَثِیْرَةًؕ-
@@ -35,7 +35,7 @@ const HeroSection = () => {
             <p className="text-sm text-gray-600">— صحیح مسلم</p>
           </div>
 
-          <Button className = "cursor-pointer hover:bg-blue-800 transition duration-300" >
+          <Button className = "cursor-pointer hover:bg-blue-800 transition duration-300 sm:w-auto w-fit mx-auto md:m-0" >
             Apply for Qarz-e-Hasana
           </Button>
           
