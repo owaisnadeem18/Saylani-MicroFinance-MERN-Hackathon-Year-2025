@@ -1,19 +1,30 @@
 export const loanData = {
+  
+  // 1. Wedding Loans
+  "Wedding": {
+    subcategories: ["Valima", "Furniture", "Valima Food", "Jahez"],
+    maxLoan: 500000, // 5 lac
+    loanPeriod: 3 // years
+  },
 
-    // 1st Category:
-    
-    "Wedding" : ["Valima", "Furniture", "Valima Food", "Jahez"] ,
+  // 2. Home Construction Loans
+  "Home Construction": {
+    subcategories: ["Structure", "Finishing"],
+    maxLoan: 1000000, // 10 lac
+    loanPeriod: 5 // years
+  },
 
-    // 2nd Category: 
-    
-    "Home Construction": ["Structure", "Finishing"] ,
-    
-    // 3rd Category:
-    
-    "Business Startup": ["Buy Stall", "Advance Rent for Shop" , "Shop Assets" , "Shop Machinery" ] ,
-    
-    // 4th Category: 
+  // 3. Business Startup Loans
+  "Business Startup": {
+    subcategories: ["Buy Stall", "Advance Rent for Shop", "Shop Assets", "Shop Machinery"],
+    maxLoan: 1000000, // 10 lac
+    loanPeriod: 5 // years
+  },
 
-    "Education" : ["University Fees", "Child Fees Loan" ]
-
-}
+  // 4. Education Loans 
+  "Education": {
+    subcategories: ["University Fees", "Child Fees Loan"],
+    maxLoan: "variable", // Based on requirement
+    loanPeriod: 4 // years
+  }
+};
