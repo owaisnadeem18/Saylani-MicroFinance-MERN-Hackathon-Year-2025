@@ -13,12 +13,12 @@ import { loanData } from '@/data/selectBoxLoans'
 
 const LoanCalculator = () => {
 
-  const [selectedCategory , setSelectedCategory] = useState(null) 
-  const [loanCategory , setLoanCategory] = useState(loanData)
-  const [loanSubCategory , setLoanSubCategory] = useState([]) 
+  const [selectedCategory , setSelectedCategory] = useState("") 
+  const [loanCategory] = useState(loanData)
+  const [selectedSubCategory , setSelectedSubCategory] = useState("")
 
-  const location = useLocation()
-
+  const location = useLocation()             
+    
   const pathName = location.pathname
   console.log(pathName)
 
@@ -32,7 +32,10 @@ const LoanCalculator = () => {
 
         <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-10' >
 
-          <Select onValueChange={value => setSelectedCategory(value)} >
+          <Select value= {selectedCategory} onValueChange={value => {
+            setSelectedCategory(value)
+            setSelectedSubCategory("");
+            }} >
             <SelectTrigger className= "w-auto" >
               <SelectValue placeholder="Select Loan Category" />
             </SelectTrigger>
@@ -42,14 +45,8 @@ const LoanCalculator = () => {
                 
                 {
 
-                  Object.keys(loanCategory).map(category => <SelectItem value={category} > {category}
-                    
-                    {console.log(selectedCategory)}
-                   </SelectItem>) 
+                  Object.keys(loanCategory).map((category , index) => <SelectItem key={index} value={category} > {category} </SelectItem>) 
 
-
-
-                
                 }
                   
                 
@@ -57,7 +54,7 @@ const LoanCalculator = () => {
             </SelectContent>
           </Select>
 
-          <Select disabled = {!selectedCategory} >
+          <Select value= {selectedSubCategory} onValueChange={(value) => setSelectedSubCategory(value)} disabled = {!selectedCategory} >
             <SelectTrigger className="w-auto">
               <SelectValue placeholder="Select Loan Sub Category" />
             </SelectTrigger>
