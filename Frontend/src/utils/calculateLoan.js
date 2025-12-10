@@ -8,28 +8,26 @@ export const calculateLoan = (period , initialDeposit, setInstallmentAmount , se
     let initialAmount = Number(initialDeposit)
     
     if (!initialAmount) {
-        alert("Please Enter Initial Amount")
-        return
+        alert("Please Enter Initial Amount")             
+        return                                                                                                               
     }
 
     setLoading(true)
 
     setTimeout(() => {
-        
-
+           
         const totalMonths = years * 12 
 
         console.log("total months -> " , totalMonths)
         
-        const monthlyInstallment = (initialAmount / totalMonths)
-        
+        const monthlyInstallment = (initialAmount / totalMonths)                                                                                                                                                
+                
         console.log("Initial Amount -> " , monthlyInstallment)
-
+                                                                      
+        const roundedInstallment = Math.round(monthlyInstallment) 
         
-        const roundedInstallment = Math.round(monthlyInstallment)
-        
-        setInstallmentAmount(roundedInstallment)
-        setLoading(false)
-    }, 3000);
+        setInstallmentAmount(roundedInstallment)  
+        setLoading(false)                                                                                                                                                                                    
+    }, 3000);                                                                                        
 
-}
+}                                                                                                                                                                                                                                                                                       
