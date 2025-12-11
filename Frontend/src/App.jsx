@@ -7,6 +7,8 @@ import ApplyForLoan from "./components/ApplyForLoan";
 import LoanCalculator from "./components/LoanCalculator";
 import { ToastContainer } from "react-toastify";
 import HomePage from "./components/HomePage";
+import ChangePassword from "./components/ChangePassword";
+import UserLogin from "./components/user/UserLogin";
 
 function App() {
   const isLoggedIn = false;
@@ -33,6 +35,8 @@ function App() {
         <Route path="/loan-categories" element = {<LoanCardsContainer/>} />
         <Route path="/apply-for-loan" element = {<ApplyForLoan/>} />
         <Route path="/loan-calculator" element = {<LoanCalculator/>} />
+        <Route path="/user/change-password" element = {<ChangePassword/>} />
+        <Route path="/user/login" element = {<UserLogin />} />
 
       </Routes>
 

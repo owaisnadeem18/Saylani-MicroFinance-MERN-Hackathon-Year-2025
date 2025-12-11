@@ -15,12 +15,16 @@ import { Input } from './ui/input'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { userRegisterSchema } from '@/utils/schemas/user/UserRegisterSchema'
-import { toast } from 'react-toastify'
-
-
+import useRegisterForm from '@/hooks/user/useRegisterForm'
+import { useNavigate } from 'react-router-dom'
+                                                  
 const RegisterUserPopup = () => {
 
-    // initialize and connect react hook form with it: 
+    const {registerUserHandler , loading} = useRegisterForm()
+
+    const navigate = useNavigate()
+
+    // initialize and connect react hook form with it:   
 
     const {
         register,
@@ -31,9 +35,15 @@ const RegisterUserPopup = () => {
         resolver: zodResolver(userRegisterSchema)
     })
 
-    const onSubmit = (data) => {
+    const onSubmit = async (data) => {
         console.log(data)
-        reset()
+
+        const res = await registerUserHandler(data)
+
+        if (res.success) {              
+            reset() 
+            navigate("/user/login")
+        }
     }
 
     return (
@@ -53,7 +63,7 @@ const RegisterUserPopup = () => {
                 <form className="grid gap-4" onSubmit={handleSubmit(onSubmit)} >
                     <div className="grid gap-2">
                         <Label htmlFor="name">Name</Label>
-                        <Input id="name" name="name" placeholder="Enter your full name" {...register("name")} />
+                        <Input id="name" placeholder="Enter your full name" {...register("name")} />                                          
 
                         {
                             errors.name && (
@@ -88,7 +98,7 @@ const RegisterUserPopup = () => {
                             <Button variant="outline" onClick = {() => reset()} className = "cursor-pointer" >Cancel</Button>
                         </DialogClose>
 
-                        <Button type="submit" className = "cursor-pointer" >Submit</Button>
+                        <Button type="submit" className = "cursor-pointer" >{loading ? "Processing..." : "Submit"}</Button>
                     </DialogFooter>
                 </form>
             </DialogContent>

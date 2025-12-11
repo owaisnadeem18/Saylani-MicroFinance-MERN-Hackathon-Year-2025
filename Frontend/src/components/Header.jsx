@@ -64,7 +64,7 @@ export default function Header() {
         {/* Login Button */}  
         <div className="hidden lg:flex lg:flex-1 lg:justify-end">
           <NavLink
-            to="/apply-for-loan"
+            to="/user/login"
             className="text-sm font-semibold text-gray-900 hover:text-blue-600"
           >
             Login →
