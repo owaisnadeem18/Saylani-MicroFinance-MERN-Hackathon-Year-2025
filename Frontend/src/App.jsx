@@ -35,7 +35,7 @@ function App() {
         <Route path="/loan-categories" element = {<LoanCardsContainer/>} />
         <Route path="/apply-for-loan" element = {<ApplyForLoan/>} />
         <Route path="/loan-calculator" element = {<LoanCalculator/>} />
-        <Route path="/user/change-password" element = {<ChangePassword/>} />
+        <Route path="/user/:id/change-password" element = {<ChangePassword/>} />
         <Route path="/user/login" element = {<UserLogin />} />
 
       </Routes>

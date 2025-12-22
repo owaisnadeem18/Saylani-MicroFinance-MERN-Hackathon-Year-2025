@@ -24,7 +24,7 @@ const RegisterUserPopup = () => {
 
     const navigate = useNavigate()
 
-    // initialize and connect react hook form with it:   
+    // initialize and connect react hook form with it:                                                  
 
     const {
         register,
@@ -32,7 +32,7 @@ const RegisterUserPopup = () => {
         reset,
         formState: { errors }
     } = useForm({
-        resolver: zodResolver(userRegisterSchema)
+        resolver: zodResolver(userRegisterSchema)    
     })
 
     const onSubmit = async (data) => {

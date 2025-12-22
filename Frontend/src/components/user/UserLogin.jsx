@@ -7,6 +7,7 @@ import { Input } from '../ui/input'
 import { Button } from '../ui/button'
 import { userLoginSchema } from '@/utils/schemas/user/UserLoginSchema'
 import useLoginForm from '@/hooks/user/useLoginForm'
+import { useNavigate } from 'react-router-dom'
 
 const UserLogin = () => {
 
@@ -14,11 +15,14 @@ const UserLogin = () => {
 
     const { loading, userLoginHandler } = useLoginForm()
 
+
+    const navigate = useNavigate()
+
     const {
         register,
         reset,
         handleSubmit,
-        formState: { errors }
+        formState: { errors }                               
     } = useForm({
         resolver: zodResolver(userLoginSchema)
     })
@@ -27,15 +31,27 @@ const UserLogin = () => {
 
     const onSubmit = async (data) => {
 
-        const res = await userLoginHandler(data)
+        try {
+              const res = await userLoginHandler(data)
 
         console.log("Response in the on submit is -> ", res)
 
-        if (res.success) {
+        if (res?.success) {                                
 
             reset()
             console.log(data)
 
+            if (res?.userExists?.mustChangePassword) {
+                // It will tell the user that this is compulsory to change the password if it's (must change password is true)
+                navigate(`/user/${res?.userExists.id}/change-password`)
+           }
+
+        }
+
+        }
+        
+        catch (err) {
+            console.log(err)
         }
 
     }
@@ -47,7 +63,7 @@ const UserLogin = () => {
             <div className='flex justify-center flex-col items-center gap-5 min-h-[calc(100vh-88px)] mx-8 sm:mx-0' >
 
                 <h1 className="text-3xl sm:text-4xl font-bold text-center text-gray-800">
-                    Login
+                    Login 
                 </h1>
 
 

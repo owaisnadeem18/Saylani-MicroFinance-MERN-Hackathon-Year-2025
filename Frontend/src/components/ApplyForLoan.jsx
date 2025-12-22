@@ -10,7 +10,7 @@ const ApplyForLoan = () => {
       </h3>
       
       <RegisterUserPopup/>
-
+          
     </div>
   )
 }

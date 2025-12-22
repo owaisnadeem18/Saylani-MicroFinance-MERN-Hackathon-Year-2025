@@ -9,7 +9,7 @@ const ChangePassword = () => {
                 Change Your Password
             </h3>
 
-            <ChangePasswordForm/>
+            <ChangePasswordForm />
 
 
         </div>
