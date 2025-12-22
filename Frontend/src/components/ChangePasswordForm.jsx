@@ -10,6 +10,11 @@ import { useSelector } from 'react-redux'
 import { store } from '@/store'
 
 const ChangePasswordForm = () => {
+
+
+    const mustChangePassword = useSelector(store => store?.auth?.user?.mustChangePassword)
+    
+    
     const [showCurrentPassword, setShowCurrentPassword] = useState(false);
     const [showNewPassword, setShowNewPassword] = useState(false);
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
@@ -19,12 +24,11 @@ const ChangePasswordForm = () => {
         handleSubmit,
         formState: { errors },
     } = useForm({
-        resolver: zodResolver(changePasswordSchema),
+        resolver: zodResolver(changePasswordSchema(mustChangePassword)),
     });
 
     // mustChangePassword could be accessed with the help of redux toolkit: 
     
-    const mustChangePassword = useSelector(store => store?.auth?.user?.mustChangePassword)
 
 
     
