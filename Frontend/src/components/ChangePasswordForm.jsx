@@ -6,6 +6,8 @@ import { Label } from './ui/label'
 import { Input } from './ui/input'
 import { Button } from './ui/button'
 import { EyeIcon, EyeOff } from 'lucide-react'
+import { useSelector } from 'react-redux'
+import { store } from '@/store'
 
 const ChangePasswordForm = () => {
     const [showCurrentPassword, setShowCurrentPassword] = useState(false);
@@ -24,12 +26,27 @@ const ChangePasswordForm = () => {
         console.log(data);
     };
 
+    // mustChangePassword could be accessed with the help of redux toolkit: 
+    
+    const mustChangePassword = useSelector(store => store?.auth?.user?.mustChangePassword)
+
+    console.log("Answer from redux toolkit: " , mustChangePassword)
+
     return (
         <form
             onSubmit={handleSubmit(onSubmit)}
             className="grid gap-4 max-w-xl m-auto p-8 rounded-xl box-shadow"
         >
-            {/* Current Password */}
+
+            {/* we only have to show this field , if the user did not change the system generated password so far */}
+
+            {
+                !mustChangePassword && 
+                (
+
+                        
+            // current password: 
+                    
             <div className="grid gap-2">
                 <Label htmlFor="currentPassword">Current Password</Label>
                 <Input
@@ -45,18 +62,21 @@ const ChangePasswordForm = () => {
                                 <EyeOff size={20} />
                                 :
                                 <EyeIcon
-                                    size={20}
+                                size={20}
                                 /> 
                             }
                         </span>
                     }
-                />
+                    />
                 {errors.currentPassword && (
                     <p className="text-red-500 text-sm">
                         {errors.currentPassword.message}
                     </p>
                 )}
             </div>
+                )
+            
+            }
 
             {/* New Password */}
             <div className="grid gap-2">

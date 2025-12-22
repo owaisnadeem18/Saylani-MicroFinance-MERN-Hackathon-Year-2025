@@ -8,6 +8,8 @@ import { Button } from '../ui/button'
 import { userLoginSchema } from '@/utils/schemas/user/UserLoginSchema'
 import useLoginForm from '@/hooks/user/useLoginForm'
 import { useNavigate } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+import { setUser } from '@/features/auth/authSlice'
 
 const UserLogin = () => {
 
@@ -18,6 +20,8 @@ const UserLogin = () => {
 
     const navigate = useNavigate()
 
+    const dispatch = useDispatch()
+  
     const {
         register,
         reset,
@@ -32,16 +36,21 @@ const UserLogin = () => {
     const onSubmit = async (data) => {
 
         try {
-              const res = await userLoginHandler(data)
+              
+        const res = await userLoginHandler(data)
 
         console.log("Response in the on submit is -> ", res)
 
-        if (res?.success) {                                
+        if (res?.success) {
+            
+            dispatch(setUser(res?.userExists))
+
+            console.log(res?.userExists , " <= is the user exists ") 
 
             reset()
             console.log(data)
 
-            if (res?.userExists?.mustChangePassword) {
+            if (res?.userExists?.mustChangePassword) {  
                 // It will tell the user that this is compulsory to change the password if it's (must change password is true)
                 navigate(`/user/${res?.userExists.id}/change-password`)
            }

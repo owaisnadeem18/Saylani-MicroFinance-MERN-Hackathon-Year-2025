@@ -19,7 +19,6 @@ export const authSlice = createSlice({
             state.user = null
             state.isAuthenticated = false
         } ,
-
                                                                           
         setLoading: (state , action) => {
             state.loading = action.payload                                                       
