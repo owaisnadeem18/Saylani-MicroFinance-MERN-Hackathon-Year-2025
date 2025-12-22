@@ -66,10 +66,10 @@ const UserLogin = () => {
     }
 
     return (
-        <div className='min-h-[calc(100vh-88px)]' >
+        <div className='min-h-[calc(100dvh-88px)]' >
 
 
-            <div className='flex justify-center flex-col items-center gap-5 min-h-[calc(100vh-88px)] mx-8 sm:mx-0' >
+            <div className='flex justify-center flex-col items-center gap-5 min-h-[calc(100dvh-88px)] mx-8 sm:mx-0' >
 
                 <h1 className="text-3xl sm:text-4xl font-bold text-center text-gray-800">
                     Login 

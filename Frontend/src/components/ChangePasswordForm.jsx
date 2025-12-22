@@ -22,15 +22,15 @@ const ChangePasswordForm = () => {
         resolver: zodResolver(changePasswordSchema),
     });
 
-    const onSubmit = (data) => {
-        console.log(data);
-    };
-
     // mustChangePassword could be accessed with the help of redux toolkit: 
     
     const mustChangePassword = useSelector(store => store?.auth?.user?.mustChangePassword)
 
-    console.log("Answer from redux toolkit: " , mustChangePassword)
+
+    
+    const onSubmit = (data) => {
+        console.log(data); 
+    };
 
     return (
         <form
@@ -130,7 +130,7 @@ const ChangePasswordForm = () => {
                     </p>
                 )}
             </div>
-
+                           
             <Button type="submit" className="cursor-pointer">
                 Change Password
             </Button>
