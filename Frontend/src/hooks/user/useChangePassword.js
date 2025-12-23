@@ -19,6 +19,7 @@ const useChangePassword = () => {
         try {
 
             const payload = {
+                oldPassword: credentials.currentPassword ,                                                                                              
                 newPassword : credentials.newPassword ,
                 confirmNewPassword : credentials.confirmNewPassword
             } 

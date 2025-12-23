@@ -11,17 +11,19 @@ import { store } from '@/store'
 import useChangePassword from '@/hooks/user/useChangePassword'
 import { toast } from 'react-toastify'
 import { setUser } from '@/features/auth/authSlice'
+import { useNavigate } from 'react-router-dom'
 
 const ChangePasswordForm = () => {
-
 
     // Now, here we have to call the custom hook , which has been created to change password: 
 
     const {loading , changePasswordHandler} = useChangePassword()
 
-    const mustChangePassword = useSelector(store => store?.auth?.user?.mustChangePassword)
+    const mustChangePassword = useSelector(store => store?.auth?.userObj?.mustChangePassword)
 
     const dispatch = useDispatch()
+
+    const navigate = useNavigate()
     
     const [showCurrentPassword, setShowCurrentPassword] = useState(false);
     const [showNewPassword, setShowNewPassword] = useState(false);
@@ -45,18 +47,23 @@ const ChangePasswordForm = () => {
 
             if (res?.success) {
 
-                dispatch(setUser(res?.user))
+                dispatch(setUser(res?.userObj))
                 
-                console.log("User exists => " , res)
+                console.log("overall response => " , res)
+                console.log("User exists ? " , res?.userObj)
 
                 reset()
-                console.log(res.data)
+                console.log(res)           
+                
+                if (!mustChangePassword) {
+                    navigate("/apply-for-loan")
+                }
             
             }
             
             console.log(data); 
         }
-
+ 
         catch (err) {
             console.log(err)
             toast.error(err)

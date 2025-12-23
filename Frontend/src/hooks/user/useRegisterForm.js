@@ -33,7 +33,7 @@ const useRegisterForm = () => {
       if (res.data.success) {
          toast.success(res.data.message)
       }
-
+   
       console.log("Response -> " , res)
 
       return res.data
@@ -54,4 +54,4 @@ loading,
 };
 };
 
-export default useRegisterForm;                                                                                                                          
+export default useRegisterForm;
