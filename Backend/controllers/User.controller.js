@@ -13,7 +13,7 @@ import bcrypt from "bcrypt";
 // This is the register user API
 // Q. Where it will be used in frontend ?
 // Ans. When pop up will open to enter the information of the user before proceeding qarz e hasana application
-                                                          
+
 export const registerUser = async (req, res) => {
   try {
     const { Name, Email, CNIC } = req.body;
@@ -36,11 +36,11 @@ export const registerUser = async (req, res) => {
      */
 
     // check if user already exists or not with CNIC ...
-                           
-    const cnicClean = CNIC.replace(/-/g, "");                                                                                         
-          
-    // 13 digit validation (Pakistan standard)              
-    if (!/^\d{13}$/.test(cnicClean)) {  
+
+    const cnicClean = CNIC.replace(/-/g, "");
+
+    // 13 digit validation (Pakistan standard)
+    if (!/^\d{13}$/.test(cnicClean)) {
       return res.status(400).json({
         success: false,
         message: "CNIC should be 13 digits.",
@@ -64,7 +64,7 @@ export const registerUser = async (req, res) => {
 
     /**
      * 🔹 WHY CHECK EMAIL EXISTENCE?
-     * Login requires Email + Password b                                                                   
+     * Login requires Email + Password b
      * So email must be unique.
      */
 
@@ -149,7 +149,7 @@ export const loginUser = async (req, res) => {
       return res.status(404).json({
         success: false,
         message: "Email is missing !",
-      });     
+      });
     }
 
     if (!Password) {
@@ -199,7 +199,7 @@ export const loginUser = async (req, res) => {
       token,
       userExists: {
         id: userExists._id,
-        token: token ,
+        token: token,
         Name: userExists.Name,
         Email: userExists.Email,
         Password: userExists.Password,
@@ -275,11 +275,17 @@ export const updateUserPassword = async (req, res) => {
     // get userId:
     const { userId } = req.params;
 
-    console.log(userId , " => userId ")
+    console.log(userId, " => userId ");
 
     // get user from the db with our userId:
 
-    const user = await User.findById(userId);
+    const user = await User.findById(userId).select("-Password -__v");
+
+    // user token:
+    const payload = { userId: user._id, role: user.role };
+    const token = jwt.sign(payload, process.env.JWT_SECRET, {
+      expiresIn: process.env.JWT_EXPIRES_IN || "7d",
+    });
 
     if (!user) {
       return res.status(404).json({
@@ -295,9 +301,13 @@ export const updateUserPassword = async (req, res) => {
       });
     }
 
-    console.log(confirmNewPassword , " => confirmNewPassword ")
+    // we have to send the entire user object after adding the token inside it:
 
-    console.log(newPassword , " => newPassword ")
+    const userObj = user.toObject();
+
+    console.log(confirmNewPassword, " => confirmNewPassword ");
+
+    console.log(newPassword, " => newPassword ");
 
     // Case # 01: if user.mustChangePassword is true:
 
@@ -307,42 +317,44 @@ export const updateUserPassword = async (req, res) => {
       if (newPassword !== confirmNewPassword) {
         return res.status(400).json({
           message: "New Password & Confirm New Password do not match ! ",
-          success: false,    
+          success: false,
         });
       }
 
       // Now , we need to hash the new password before saving it into the db:
 
-      console.log("Unhashed Password is -> " , newPassword)
+      console.log("Unhashed Password is -> ", newPassword);
 
       const hashedNewPassword = await bcrypt.hash(newPassword, 10);
 
       user.Password = hashedNewPassword;
       user.mustChangePassword = false;
-      await user.save();      
+      await user.save();
+
+      userObj.token = token;
 
       return res.status(200).json({
         success: true,
         message: "Password Successfully Updated ! ",
-      });     
-
-    } 
-    else {
+        token,
+        userObj,
+      });
+    } else {
       if (!oldPassword) {
         return res.status(400).json({
           message: "Must enter old password first",
-          success: false
-        })
+          success: false,
+        });
       }
 
       // now , we need to match old password with the password existed in DB:
       const validateOldPass = await bcrypt.compare(oldPassword, user.Password);
 
-      console.log("Old Pass -> " , validateOldPass)
+      console.log("Old Pass -> ", validateOldPass);
 
       if (!validateOldPass) {
         return res.status(400).json({
-          message: "Old Password is Incorrect",                                                   
+          message: "Old Password is Incorrect",
           success: false,
         });
       }
@@ -352,11 +364,10 @@ export const updateUserPassword = async (req, res) => {
       return res.status(400).json({
         success: false,
         message: "New Password & Confirm New Password do not match !",
-        
       });
     }
 
-    user.mustChangePassword = false
+    user.mustChangePassword = false;
 
     // hash newPassword before directly saving to Database:
     const hashedPassword = await bcrypt.hash(newPassword, 10);
@@ -368,11 +379,8 @@ export const updateUserPassword = async (req, res) => {
     return res.status(200).json({
       message: "Password Updated Successfully",
       success: true,
-      user: {
-          _id: user._id,
-          email: user.email,
-          mustChangePassword: user.mustChangePassword
-        }
+      token,
+      userObj,
     });
   } catch (err) {
     return res.status(500).json({
@@ -382,9 +390,9 @@ export const updateUserPassword = async (req, res) => {
   }
 };
 
-// Flow of Entire File (User.Controller.js) in bullet points: 
+// Flow of Entire File (User.Controller.js) in bullet points:
 
-// ----------------------------------------------- 1 --------------------------------- 
+// ----------------------------------------------- 1 ---------------------------------
 
 // ✔ 1. Register User API — COMPLETE
 
@@ -406,11 +414,11 @@ export const updateUserPassword = async (req, res) => {
 
 // Sending email
 
-// Returning correct response         
+// Returning correct response
 
 // 👉 100% correct and exactly as per your Saylani MicroFinance document.
 
-// ----------------------------------------------- 2 --------------------------------- 
+// ----------------------------------------------- 2 ---------------------------------
 
 // ✔ 2. Login User API — COMPLETE
 
@@ -428,7 +436,7 @@ export const updateUserPassword = async (req, res) => {
 
 // 👉 Absolutely correct and production-ready.
 
-// ----------------------------------------------- 3 --------------------------------- 
+// ----------------------------------------------- 3 ---------------------------------
 
 // ✔ 3. Get User Details API — COMPLETE
 
