@@ -36,11 +36,11 @@ export const registerUser = async (req, res) => {
      */
 
     // check if user already exists or not with CNIC ...
-
-    const cnicClean = CNIC.replace(/-/g, "");
-
-    // 13 digit validation (Pakistan standard)
-    if (!/^\d{13}$/.test(cnicClean)) {
+                           
+    const cnicClean = CNIC.replace(/-/g, "");                                                                                         
+          
+    // 13 digit validation (Pakistan standard)              
+    if (!/^\d{13}$/.test(cnicClean)) {  
       return res.status(400).json({
         success: false,
         message: "CNIC should be 13 digits.",
@@ -64,7 +64,7 @@ export const registerUser = async (req, res) => {
 
     /**
      * 🔹 WHY CHECK EMAIL EXISTENCE?
-     * Login requires Email + Password
+     * Login requires Email + Password b                                                                   
      * So email must be unique.
      */
 
@@ -199,6 +199,7 @@ export const loginUser = async (req, res) => {
       token,
       userExists: {
         id: userExists._id,
+        token: token ,
         Name: userExists.Name,
         Email: userExists.Email,
         Password: userExists.Password,
@@ -306,7 +307,7 @@ export const updateUserPassword = async (req, res) => {
       if (newPassword !== confirmNewPassword) {
         return res.status(400).json({
           message: "New Password & Confirm New Password do not match ! ",
-          success: false,
+          success: false,    
         });
       }
 
@@ -318,12 +319,12 @@ export const updateUserPassword = async (req, res) => {
 
       user.Password = hashedNewPassword;
       user.mustChangePassword = false;
-      await user.save();
+      await user.save();      
 
       return res.status(200).json({
         success: true,
         message: "Password Successfully Updated ! ",
-      });
+      });     
 
     } 
     else {
@@ -341,7 +342,7 @@ export const updateUserPassword = async (req, res) => {
 
       if (!validateOldPass) {
         return res.status(400).json({
-          message: "Old Password is Incorrect",
+          message: "Old Password is Incorrect",                                                   
           success: false,
         });
       }
@@ -349,8 +350,9 @@ export const updateUserPassword = async (req, res) => {
 
     if (newPassword !== confirmNewPassword) {
       return res.status(400).json({
-        message: "New Password & Confirm New Password do not match !",
         success: false,
+        message: "New Password & Confirm New Password do not match !",
+        
       });
     }
 
@@ -366,6 +368,11 @@ export const updateUserPassword = async (req, res) => {
     return res.status(200).json({
       message: "Password Updated Successfully",
       success: true,
+      user: {
+          _id: user._id,
+          email: user.email,
+          mustChangePassword: user.mustChangePassword
+        }
     });
   } catch (err) {
     return res.status(500).json({
@@ -399,7 +406,7 @@ export const updateUserPassword = async (req, res) => {
 
 // Sending email
 
-// Returning correct response
+// Returning correct response         
 
 // 👉 100% correct and exactly as per your Saylani MicroFinance document.
 

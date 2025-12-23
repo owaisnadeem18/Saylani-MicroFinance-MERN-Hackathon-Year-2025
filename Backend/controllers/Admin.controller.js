@@ -136,7 +136,7 @@ export const generateQRcode = async (req, res) => {
 
     const appointment = loan.appointment || {
       date: new Date(), // today
-      time: "10:00",
+      time: "10:00",       
       officeLocation: "Saylani Welfare Head Office Bahadurabad",      
     }
 
@@ -156,19 +156,19 @@ export const generateQRcode = async (req, res) => {
     return res.status(201).json({
       message: "QR code generated successfully",
       success: true,
-      loanId: loan._id,
+      loanId: loan._id, 
       tokenNumber,
-      QRCodeImage: qrCodeImage,
+      QRCodeImage: qrCodeImage, 
       appointment,
-    });
+    });           
   }
-  
+   
   catch (err) {
-    return res.status(500).json({
+    return res.status(500).json({                                            
       message: "Internal Server Error",
       success: false,
-      error: err.message,
-    });
-  }
+      error: err.message,  
+    });                           
+  }                                                                       
 
 };

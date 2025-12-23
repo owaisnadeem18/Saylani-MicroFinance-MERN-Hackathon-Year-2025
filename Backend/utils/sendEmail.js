@@ -15,11 +15,11 @@ export const sendEmail = async (to , subject , text) => {
       to,
       subject,
       text,
-    });
+    });                                                                 
 
     console.log("📧 Email sent successfully to:", to);
-
-    }
+                                         
+    }                
     catch (err) {
         console.log("Error sending the mail is : " , err.message)
     }
