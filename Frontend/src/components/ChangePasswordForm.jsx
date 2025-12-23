@@ -6,34 +6,62 @@ import { Label } from './ui/label'
 import { Input } from './ui/input'
 import { Button } from './ui/button'
 import { EyeIcon, EyeOff } from 'lucide-react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { store } from '@/store'
+import useChangePassword from '@/hooks/user/useChangePassword'
+import { toast } from 'react-toastify'
+import { setUser } from '@/features/auth/authSlice'
 
 const ChangePasswordForm = () => {
 
 
+    // Now, here we have to call the custom hook , which has been created to change password: 
+
+    const {loading , changePasswordHandler} = useChangePassword()
+
     const mustChangePassword = useSelector(store => store?.auth?.user?.mustChangePassword)
-    
+
+    const dispatch = useDispatch()
     
     const [showCurrentPassword, setShowCurrentPassword] = useState(false);
     const [showNewPassword, setShowNewPassword] = useState(false);
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
     const {
-        register,
+        register,  
         handleSubmit,
+        reset,
         formState: { errors },
     } = useForm({
         resolver: zodResolver(changePasswordSchema(mustChangePassword)),
     });
 
     // mustChangePassword could be accessed with the help of redux toolkit: 
-    
 
+    const onSubmit = async (data) => {
+        
+        try {
+            const res = await changePasswordHandler(data)
 
-    
-    const onSubmit = (data) => {
-        console.log(data); 
+            if (res?.success) {
+
+                dispatch(setUser(res?.user))
+                
+                console.log("User exists => " , res)
+
+                reset()
+                console.log(res.data)
+            
+            }
+            
+            console.log(data); 
+        }
+
+        catch (err) {
+            console.log(err)
+            toast.error(err)
+        } 
+
     };
 
     return (
@@ -136,7 +164,10 @@ const ChangePasswordForm = () => {
             </div>
                            
             <Button type="submit" className="cursor-pointer">
-                Change Password
+                {
+                    loading ?
+                    "loading..." : "Change Password" 
+                } 
             </Button>
         </form>
     );

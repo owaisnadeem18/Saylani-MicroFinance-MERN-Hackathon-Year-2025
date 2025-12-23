@@ -1,10 +1,16 @@
+import { store } from "@/store";
 import axios from "axios";
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
 
 const useRegisterForm = () => {
   
+
+
   const [loading, setLoading] = useState(false);
+
+  const token = useSelector(store => store?.auth?.user?.token)
 
   const registerUserHandler = async (formValues) => {
     try {
@@ -18,7 +24,8 @@ const useRegisterForm = () => {
 
       const res = await axios.post("http://localhost:5000/api/user/register" , payload , {
         headers: {
-          "Content-Type" : "application/json"
+          "Content-Type" : "application/json" ,
+          "Authorization" : `Bearer ${token}`
         },
         withCredentials: true
       })
