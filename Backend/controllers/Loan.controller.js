@@ -4,17 +4,18 @@
 
 import Loan from "../models/Loan.model.js";
 import User from "../models/User.model.js";
-import QRCode from "qrcode";
+import QRCode from "qrcode";           
 
 // ------------------------------------- 01 --------------------------------------
 // Request # 01 for the user to apply for loan 
 export const applyForLoan = async (req, res) => {
   try {
-    const { userId, category, subcategory, loanAmount, loanPeriod } = req.body;
+
+    const { userId, category, subcategory, loanAmount, loanPeriod } = req.body;     
 
     // 1. Validate all required fields are filled !
 
-    if (!userId || !category || !subcategory || !loanAmount || !loanPeriod) {
+    if (!userId || !category || !subcategory || !loanAmount || !loanPeriod) {  
       return res.status(400).json({
         success: false,
         message: "Something is missing",
@@ -78,7 +79,8 @@ export const applyForLoan = async (req, res) => {
         loanId: NewLoanApplication._id,
         tokenNumber: NewLoanApplication.tokenNumber,
         appointment: appointment,
-        qrImage: qrImage
+        qrImage: qrImage ,
+        userExists
     })
 
   } catch (err) {
