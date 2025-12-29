@@ -10,12 +10,6 @@ const useChangePassword = () => {
 
     const { user , token } = useSelector(store => store?.auth)
 
-    console.log("Store is => " , store)   
-    
-    console.log(`User is => ${user} `)
-
-    console.log(`token is => ${token} `)
-
     const [loading , setLoading] = useState(false)
 
     const changePasswordHandler = async (credentials) => {

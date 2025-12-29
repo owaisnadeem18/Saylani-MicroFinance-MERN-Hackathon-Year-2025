@@ -7,8 +7,14 @@ import { Input } from './ui/input'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from './ui/select'
 import { ApplyLoanFormCategories } from '@/data/loanApplyFormCategories'
 import { Button } from './ui/button'
+import { toast } from 'react-toastify'
+import useApplyLoan from '@/hooks/loan/useApplyLoan'
 
 const LoanApplicationForm = () => {
+
+    // call the custom hook: 
+
+    const {loading , LoanFormHandler} = useApplyLoan()
 
     const [selectedCategory, setSelectedCategory] = useState(null)
 
@@ -25,9 +31,27 @@ const LoanApplicationForm = () => {
         resolver: zodResolver(userApplyLoanForm)
     })
 
-    const onSubmit = (data) => {
+    const onSubmit = async (data) => {
+
         alert("Submitted")
-        console.log(data)
+
+        try {
+            const apiResponse = await LoanFormHandler(data)
+
+            if (apiResponse?.success) {
+                reset()
+                console.log(data)
+            }
+
+
+        }
+
+        catch (err) {
+            console.log(err)
+            toast.error(err?.resp)
+        }
+
+        
     }
 
     return (
@@ -132,7 +156,9 @@ const LoanApplicationForm = () => {
             <div className='md:col-span-2 flex justify-center' >
 
                 <Button type="submit" className="w-full md:w-1/3 cursor-pointer" >
-                    Apply
+                    {
+                        loading ? "Applying..." : "Apply"
+                    } 
                 </Button>
             </div>
 
