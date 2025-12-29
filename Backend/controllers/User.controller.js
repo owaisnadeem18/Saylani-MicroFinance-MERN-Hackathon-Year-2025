@@ -131,7 +131,7 @@ Saylani Welfare Qarz-e-Hasana Team`;
       success: false,
       error: err.message,
     });
-  }
+  }                                             
 };
 
 // -------------------------------------------------------------------------- 2 --------------------------------------------------------------------------
@@ -279,13 +279,11 @@ export const updateUserPassword = async (req, res) => {
 
     // get user from the db with our userId:
 
-    const user = await User.findById(userId).select("-Password -__v");
+    const user = await User.findById(userId)
+                      
+    console.log("User details are -> " , user)
 
-    // user token:
-    const payload = { userId: user._id, role: user.role };
-    const token = jwt.sign(payload, process.env.JWT_SECRET, {
-      expiresIn: process.env.JWT_EXPIRES_IN || "7d",
-    });
+    
 
     if (!user) {
       return res.status(404).json({
@@ -302,8 +300,6 @@ export const updateUserPassword = async (req, res) => {
     }
 
     // we have to send the entire user object after adding the token inside it:
-
-    const userObj = user.toObject();
 
     console.log(confirmNewPassword, " => confirmNewPassword ");
 
@@ -331,13 +327,12 @@ export const updateUserPassword = async (req, res) => {
       user.mustChangePassword = false;
       await user.save();
 
-      userObj.token = token;
+      const safeUser = await User.findById(userId).select("-Password -__v")
 
       return res.status(200).json({
         success: true,
         message: "Password Successfully Updated ! ",
-        token,
-        userObj,
+        user: safeUser
       });
     } else {
       if (!oldPassword) {
@@ -376,26 +371,30 @@ export const updateUserPassword = async (req, res) => {
 
     await user.save();
 
+    
+      const safeUser = await User.findById(userId).select("-Password -__v")
+
+
     return res.status(200).json({
       message: "Password Updated Successfully",
       success: true,
-      token,
-      userObj,
+      user: safeUser
     });
   } catch (err) {
     return res.status(500).json({
       message: "Internal Server Error",
       success: false,
     });
-  }
-};
+  }       
+};                                        
 
+ 
 // Flow of Entire File (User.Controller.js) in bullet points:
-
+                                                                                                                                          
 // ----------------------------------------------- 1 ---------------------------------
 
-// ✔ 1. Register User API — COMPLETE
-
+// ✔ 1. Register User API — COMPLETE 
+                                   
 // You covered:
 
 // Required fields validation
