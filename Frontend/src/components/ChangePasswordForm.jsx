@@ -10,19 +10,23 @@ import { useDispatch, useSelector } from 'react-redux'
 import { store } from '@/store'
 import useChangePassword from '@/hooks/user/useChangePassword'
 import { toast } from 'react-toastify'
-import { setUser } from '@/features/auth/authSlice'
+import { setUser, updateMustChangePassword } from '@/features/auth/authSlice'
 import { useNavigate } from 'react-router-dom'
 
 const ChangePasswordForm = () => {
 
     // Now, here we have to call the custom hook , which has been created to change password: 
 
-    const {loading , changePasswordHandler} = useChangePassword()
+    const {loading , changePasswordHandler} = useChangePassword()                                                                                                     
 
-    const mustChangePassword = useSelector(store => store?.auth?.userObj?.mustChangePassword)
+    const mustChangePassword = useSelector(
+  state => state.auth.user?.mustChangePassword
+)
+
+    console.log("Must change password field is => " , mustChangePassword)
 
     const dispatch = useDispatch()
-
+                                      
     const navigate = useNavigate()
     
     const [showCurrentPassword, setShowCurrentPassword] = useState(false);
@@ -45,19 +49,24 @@ const ChangePasswordForm = () => {
         try {
             const res = await changePasswordHandler(data)
 
+            console.log("NEw response debugging is => " , res)
+
             if (res?.success) {
 
-                dispatch(setUser(res?.userObj))
-                
                 console.log("overall response => " , res)
-                console.log("User exists ? " , res?.userObj)
+                console.log("User exists ? " , res?.user)
+
+                dispatch(updateMustChangePassword(res.user.mustChangePassword))
+                
+
+                console.log("Set user is => " , setUser)
 
                 reset()
-                console.log(res)           
+                console.log(res)             
                 
                 if (!mustChangePassword) {
-                    navigate("/apply-for-loan")
-                }
+                    navigate("/apply-for-loan")                                           
+                } 
             
             }
             

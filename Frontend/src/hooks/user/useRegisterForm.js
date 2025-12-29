@@ -5,12 +5,9 @@ import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
 
 const useRegisterForm = () => {
-  
-
-
   const [loading, setLoading] = useState(false);
 
-  const token = useSelector(store => store?.auth?.user?.token)
+  const token = useSelector((store) => store?.auth?.user?.token);
 
   const registerUserHandler = async (formValues) => {
     try {
@@ -22,36 +19,36 @@ const useRegisterForm = () => {
         Email: formValues.email,
       };
 
-      const res = await axios.post("http://localhost:5000/api/user/register" , payload , {
-        headers: {
-          "Content-Type" : "application/json" ,
-          "Authorization" : `Bearer ${token}`
-        },
-        withCredentials: true
-      })
+      const res = await axios.post(
+        "http://localhost:5000/api/user/register",
+        payload,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          withCredentials: true,
+        }
+      );
 
       if (res.data.success) {
-         toast.success(res.data.message)
+        toast.success(res.data.message);
       }
-   
-      console.log("Response -> " , res)
 
-      return res.data
+      console.log("Response -> ", res);
 
+      return res.data;
     } catch (err) {
-      toast.error(err?.response?.data?.message || "Something went wrong ! ") 
-      throw err
+      toast.error(err?.response?.data?.message || "Something went wrong ! ");
+      throw err;
+    } finally {
+      setLoading(false);
     }
-    finally {
-      setLoading(false)
-    }
-
-    
   };
   return {
-registerUserHandler,
-loading,
-};
+    registerUserHandler,
+    loading,
+  };
 };
 
 export default useRegisterForm;

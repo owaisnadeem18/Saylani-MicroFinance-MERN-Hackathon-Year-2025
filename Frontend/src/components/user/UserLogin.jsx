@@ -43,9 +43,11 @@ const UserLogin = () => {
 
         if (res?.success) {
             
-            dispatch(setUser(res?.userExists))
+            dispatch(setUser({user: res?.userExists , token: res?.token}))
 
-            console.log(res?.userExists , " <= is the user exists ") 
+            
+
+            console.log(res?.userExists , " <= is the user exists") 
 
             reset()
             console.log(data)

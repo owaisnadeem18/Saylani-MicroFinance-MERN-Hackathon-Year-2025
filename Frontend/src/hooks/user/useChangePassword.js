@@ -8,7 +8,13 @@ const useChangePassword = () => {
 
     // here we have to get the user to access the id: 
 
-    const user = useSelector(store => store?.auth?.user)
+    const { user , token } = useSelector(store => store?.auth)
+
+    console.log("Store is => " , store)   
+    
+    console.log(`User is => ${user} `)
+
+    console.log(`token is => ${token} `)
 
     const [loading , setLoading] = useState(false)
 
@@ -19,7 +25,7 @@ const useChangePassword = () => {
         try {
 
             const payload = {
-                oldPassword: credentials.currentPassword ,                                                                                              
+                oldPassword: credentials.currentPassword || null ,                                                                                              
                 newPassword : credentials.newPassword ,
                 confirmNewPassword : credentials.confirmNewPassword
             } 
@@ -27,7 +33,7 @@ const useChangePassword = () => {
             setLoading(true)
 
             const res = await axios.put(
-                `http://localhost:5000/api/user/${user?.id}/change-password` , payload , {headers: { "Content-Type" : "application/json" , "Authorization" : `Bearer ${user?.token}`} , withCredentials: true }
+                `http://localhost:5000/api/user/${user?.id}/change-password` , payload , {headers: { "Content-Type" : "application/json" , "Authorization" : `Bearer ${token}`} , withCredentials: true }
             )
 
             console.log("The response from the API is => " , res)

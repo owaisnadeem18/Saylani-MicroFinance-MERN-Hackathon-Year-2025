@@ -11,7 +11,6 @@ const ChangePassword = () => {
 
             <ChangePasswordForm />
 
-
         </div>
     )
 }

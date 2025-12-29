@@ -1,12 +1,13 @@
 import React from 'react'
 import RegisterUserPopup from './RegisterUserPopup'
 import { useSelector } from 'react-redux'
-import { store } from '@/store'
 import ApplyForLoanForm from './ApplyForLoanForm'
 
 const ApplyForLoan = () => {
 
   const isUser = useSelector(store => store?.auth?.user)
+
+  console.log("Is there  user => " , isUser)
 
   const userRegistration = useSelector(store => store?.auth?.user?.mustChangePassword)
 
@@ -16,12 +17,10 @@ const ApplyForLoan = () => {
       <h3 className="text-lg sm:text-xl lg:text-2xl font-bold text-center text-gray-800 mb-5">
         Register Yourself By Applying Proceed Button
       </h3>
-
+                                     
       {
-        !isUser ? <RegisterUserPopup/> : <ApplyForLoanForm/>    
+        !isUser  ? <RegisterUserPopup/> : <ApplyForLoanForm/>    
       }             
-      
-      
           
     </div>
   )
