@@ -1,14 +1,14 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Header from "./components/Header";
-import LoanCardsContainer from "./components/LoanCardsContainer";
-import Footer from "./components/Footer";
-import ApplyForLoan from "./components/ApplyForLoan";
-import LoanCalculator from "./components/LoanCalculator";
 import { ToastContainer } from "react-toastify";
+import Header from "./components/ui/shared/Header";
 import HomePage from "./components/HomePage";
+import LoanCardsContainer from "./components/loan/LoanCardsContainer";
+import ApplyForLoan from "./components/loan/ApplyForLoan";
+import LoanCalculator from "./components/loan/LoanCalculator";
 import ChangePassword from "./components/ChangePassword";
 import UserLogin from "./components/user/UserLogin";
-import UserProfile from "./components/UserProfile";
+import UserProfile from "./components/user/UserProfile";
+import Footer from "./components/ui/shared/Footer";
 
 function App() {
 

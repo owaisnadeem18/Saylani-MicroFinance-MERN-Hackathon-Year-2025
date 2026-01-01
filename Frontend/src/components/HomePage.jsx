@@ -1,7 +1,7 @@
 import React from 'react'
 import HeroSection from './HeroSection'
-import LoanCardsContainer from './LoanCardsContainer'
-import LoanCalculator from './LoanCalculator'
+import LoanCardsContainer from './loan/LoanCardsContainer'
+import LoanCalculator from './loan/LoanCalculator' 
 
 const HomePage = () => {
     return (

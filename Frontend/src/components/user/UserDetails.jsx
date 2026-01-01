@@ -1,9 +1,9 @@
 import React from 'react'
 import useGetUser from '@/hooks/user/useGetUser'
 import { useParams } from 'react-router-dom'
-import { Spinner } from './ui/spinner'
-import { Card, CardContent, CardHeader, CardTitle } from './ui/card'
-import { Separator } from './ui/separator'
+import { Spinner } from '../ui/spinner'
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { Separator } from '../ui/separator' 
 
 const UserDetails = () => {
 

@@ -1,4 +1,4 @@
-import React from "react"
+import React from "react";
 import {
   Table,
   TableBody,
@@ -7,17 +7,24 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table"
-import { Badge } from "@/components/ui/badge"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+} from "@/components/ui/table";
+import { Badge } from "@/components/ui/badge";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import useGetUserLoans from "@/hooks/loan/useGetUserLoans";
 
-const UserLoanApplications = ({ loans }) => {
+const UserLoanApplications = () => {
 
-    const statusStyles = {
-  pending: "bg-yellow-500 text-white",
-  approved: "bg-green-500 text-white",
-  rejected: "bg-red-500 text-white",
-};
+  // Now, we have to call the custom hook: 
+
+  const {loading , loans , getLoanRequests} = useGetUserLoans()
+
+  const statusStyles = {
+    pending: "bg-yellow-500 text-white",
+    approved: "bg-green-500 text-white",
+    rejected: "bg-red-500 text-white",
+  };
+
+
 
   return (
     <div className="container mx-auto max-w-7xl px-10 py-12">
@@ -49,15 +56,11 @@ const UserLoanApplications = ({ loans }) => {
             <TableBody>
               {loans?.map((loan) => (
                 <TableRow key={loan._id}>
-                  <TableCell className="font-medium">
-                    {loan.category}
-                  </TableCell>
+                  <TableCell className="font-medium">{loan.category}</TableCell>
 
                   <TableCell>{loan.subcategory}</TableCell>
 
-                  <TableCell>
-                    Rs. {loan.loanAmount.toLocaleString()}
-                  </TableCell>
+                  <TableCell>Rs. {loan.loanAmount.toLocaleString()}</TableCell>
 
                   <TableCell>{loan.loanPeriod} Years</TableCell>
 
@@ -73,19 +76,20 @@ const UserLoanApplications = ({ loans }) => {
 
                   <TableCell>
                     <Badge
-  variant={
-    loan.status === "approved"
-      ? "success"
-      : loan.status === "rejected"
-      ? "destructive"
-      : "secondary"
-  }
-  className={
-    statusStyles[loan.status] || "bg-gray-500 text-white"
-  }
->
-  {loan.status.charAt(0).toUpperCase() + loan.status.slice(1)}
-</Badge>
+                      variant={
+                        loan.status === "approved"
+                          ? "success"
+                          : loan.status === "rejected"
+                          ? "destructive"
+                          : "secondary"
+                      }
+                      className={
+                        statusStyles[loan.status] || "bg-gray-500 text-white"
+                      }
+                    >
+                      {loan.status.charAt(0).toUpperCase() +
+                        loan.status.slice(1)}
+                    </Badge>
                   </TableCell>
                 </TableRow>
               ))}
@@ -94,7 +98,7 @@ const UserLoanApplications = ({ loans }) => {
         </CardContent>
       </Card>
     </div>
-  )
-}
+  );
+};
 
-export default UserLoanApplications
+export default UserLoanApplications;
