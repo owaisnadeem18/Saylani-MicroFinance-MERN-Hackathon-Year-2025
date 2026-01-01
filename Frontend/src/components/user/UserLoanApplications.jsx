@@ -11,12 +11,18 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import useGetUserLoans from "@/hooks/loan/useGetUserLoans";
+import { useParams } from "react-router-dom";
+import { Spinner } from "../ui/spinner";
 
 const UserLoanApplications = () => {
 
-  // Now, we have to call the custom hook: 
+  // Now, we have to call the custom hook to get loans applied by user:
+  
+  const params = useParams()
 
-  const {loading , loans , getLoanRequests} = useGetUserLoans()
+  const id = params.id
+
+  const {loading , loans} = useGetUserLoans(id)
 
   const statusStyles = {
     pending: "bg-yellow-500 text-white",
@@ -24,11 +30,11 @@ const UserLoanApplications = () => {
     rejected: "bg-red-500 text-white",
   };
 
-
+  console.log("The loans are => ", loans)
 
   return (
     <div className="container mx-auto max-w-7xl px-10 py-12">
-      <Card className="shadow-sm">
+ <Card className="shadow-sm">
         <CardHeader>
           <CardTitle className="text-xl font-semibold text-center">
             My Loan Applications
@@ -54,7 +60,19 @@ const UserLoanApplications = () => {
             </TableHeader>
 
             <TableBody>
-              {loans?.map((loan) => (
+
+              {
+                loading ? (
+                  <TableRow>
+                    <TableCell colSpan={7} className="text-center py-10" >
+                      <div className="flex items-center justify-center" >
+
+                      <Spinner />
+                      </div>
+                    </TableCell>
+                  </TableRow>
+                ) : 
+                 loans?.map((loan) => (
                 <TableRow key={loan._id}>
                   <TableCell className="font-medium">{loan.category}</TableCell>
 
@@ -92,11 +110,15 @@ const UserLoanApplications = () => {
                     </Badge>
                   </TableCell>
                 </TableRow>
-              ))}
+              ))
+              }
+            
+
             </TableBody>
           </Table>
         </CardContent>
       </Card>
+
     </div>
   );
 };
