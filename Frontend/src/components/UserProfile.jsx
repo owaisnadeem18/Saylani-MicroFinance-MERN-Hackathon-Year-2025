@@ -32,7 +32,7 @@ const UserProfile = () => {
           </h1>
 
           <Card className="shadow-lg border-none">
-            <CardHeader className="bg-linear-to-r from-blue-600 to-indigo-500 text-white rounded-t-xl p-6">
+            <CardHeader className="bg-[#024D9A] text-white rounded-t-xl p-6">
               <CardTitle className="text-2xl">
                 {info?.user?.Name || "User Name"}
               </CardTitle>
