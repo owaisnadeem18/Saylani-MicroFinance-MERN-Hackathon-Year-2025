@@ -124,7 +124,7 @@ export default function Header() {
                     <>
                       <User2 />
                       <Link
-                        to={"/profile"}
+                        to={`/profile/user/${user?.id}`}
                         variant={"link"}
                         className={"mx-2 p-0 cursor-pointer"}
                       >
@@ -224,7 +224,7 @@ export default function Header() {
       {/* Actions */}
       <div className="flex flex-col gap-2">
         <Link
-          to="/profile"
+          to= {`/profile/user/${user?.id}`}
           onClick={() => setMobileMenuOpen(false)}
           className="flex items-center gap-2 text-sm hover:text-blue-600"
         >

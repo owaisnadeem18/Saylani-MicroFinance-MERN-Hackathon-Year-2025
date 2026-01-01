@@ -41,7 +41,7 @@ const LoanCalculator = () => {
   console.log(pathName)
 
   return (
-    <div className={`${pathName.includes("loan-calculator") ? "min-h-[calc(100dvh-88px)] pt-12" : ""}`} >
+    <div className={`${pathName.includes("loan-calculator") ? "min-h-[calc(100dvh-88px)] pt-12" : "pt-12"}`} >
       <div className='max-w-7xl m-auto px-6 pb-16' >
         {/* Main Heading */}
         <h1 className="text-3xl sm:text-4xl font-bold text-center text-gray-800 mb-10">

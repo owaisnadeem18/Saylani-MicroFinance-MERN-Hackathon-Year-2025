@@ -10,7 +10,7 @@ const LoanCardsContainer = () => {
   let pathName = location.pathname
 
   return (
-    <div className={` flex items-center justify-center flex-col ${pathName.includes("loan-categories") ? "min-h-[calc(100dvh-88px)]" : "pb-16"}`} >
+    <div className={` flex items-center justify-center flex-col ${pathName.includes("loan-categories") ? "min-h-[calc(100dvh-88px)]" : ""}`} >
 
             <h1 className="text-3xl sm:text-4xl font-bold text-center text-gray-800 mb-10">
         Explore Our Loan Categories

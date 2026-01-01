@@ -1,6 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Header from "./components/Header";
-import HeroSection from "./components/HeroSection";
 import LoanCardsContainer from "./components/LoanCardsContainer";
 import Footer from "./components/Footer";
 import ApplyForLoan from "./components/ApplyForLoan";
@@ -9,11 +8,10 @@ import { ToastContainer } from "react-toastify";
 import HomePage from "./components/HomePage";
 import ChangePassword from "./components/ChangePassword";
 import UserLogin from "./components/user/UserLogin";
+import UserProfile from "./components/UserProfile";
 
 function App() {
 
-  const isLoggedIn = false;
-                                                                                                                           
   return (
     <Router>
       <ToastContainer 
@@ -27,8 +25,7 @@ function App() {
         draggable 
         pauseOnHover 
       />
-      {/* Header MUST be inside Router */}
-      <Header isLoggedIn={isLoggedIn} />
+      <Header />
 
       <Routes>
 
@@ -38,6 +35,7 @@ function App() {
         <Route path="/loan-calculator" element = {<LoanCalculator/>} />
         <Route path="/user/:id/change-password" element = {<ChangePassword/>} />
         <Route path="/user/login" element = {<UserLogin />} />
+        <Route path="/profile/user/:id" element = {<UserProfile />} />
 
       </Routes>
 
