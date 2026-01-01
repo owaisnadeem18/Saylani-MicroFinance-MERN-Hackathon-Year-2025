@@ -10,7 +10,7 @@ import {
 import { Badge } from "./ui/badge";
 import { Button } from "./ui/button";
 import { Link } from "react-router-dom";
-import { scrollToTop } from "@/utils/scrollToTop";
+import { scrollToTop } from "@/utils/handlers/scrollToTop";
 
 const LoanCard = ({ category, subcategories, description, maxLoan, loanPeriod }) => {
   return (

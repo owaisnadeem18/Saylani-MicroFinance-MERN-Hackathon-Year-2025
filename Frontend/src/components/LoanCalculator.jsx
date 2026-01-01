@@ -13,7 +13,7 @@ import {
 import { loanData } from '@/data/selectBoxLoans'
 import { Input } from './ui/input'
 import { Button } from './ui/button'
-import { calculateLoan } from '@/utils/calculateLoan'
+import { calculateLoan } from '@/utils/handlers/calculateLoan'
 import numeral from 'numeral'
 
 const LoanCalculator = () => {

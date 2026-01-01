@@ -2,7 +2,7 @@ import React from "react";
 import { Link, NavLink } from "react-router-dom";
 import { Separator } from "@/components/ui/separator";
 import { Mail, Phone, MapPin, Facebook, Instagram, Linkedin } from "lucide-react";
-import { scrollToTop } from "@/utils/scrollToTop";
+import { scrollToTop } from "@/utils/handlers/scrollToTop";
 import { footerLinks } from "@/data/footerQuickLinks";
 
 const Footer = () => {
