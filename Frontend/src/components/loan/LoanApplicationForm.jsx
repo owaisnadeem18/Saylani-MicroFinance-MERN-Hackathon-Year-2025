@@ -9,14 +9,17 @@ import { ApplyLoanFormCategories } from '@/data/loanApplyFormCategories'
 import { Button } from '../ui/button' 
 import { toast } from 'react-toastify'
 import useApplyLoan from '@/hooks/loan/useApplyLoan'
+import { useNavigate } from 'react-router-dom'
 
 const LoanApplicationForm = () => {
 
-    // call the custom hook: 
+    // calling the custom hook: 
 
     const {loading , LoanFormHandler} = useApplyLoan()
 
     const [selectedCategory, setSelectedCategory] = useState(null)
+
+    const navigate = useNavigate()
 
     // react hook form setup: 
 
@@ -38,7 +41,7 @@ const LoanApplicationForm = () => {
 
             if (apiResponse?.success) {
                 reset()
-                console.log(data)
+                navigate(`/loan/${apiResponse?.loanId}/guarantors`)
             }
 
 

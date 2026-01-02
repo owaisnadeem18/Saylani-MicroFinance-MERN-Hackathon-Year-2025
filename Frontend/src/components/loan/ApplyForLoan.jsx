@@ -7,8 +7,6 @@ const ApplyForLoan = () => {
 
   const isUser = useSelector(store => store?.auth?.user)
 
-  console.log("Is there  user => " , isUser)
-
   return (
 
     <div className='bg-gray-50' >

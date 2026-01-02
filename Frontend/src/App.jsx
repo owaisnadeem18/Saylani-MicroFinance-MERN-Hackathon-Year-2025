@@ -9,6 +9,7 @@ import ChangePassword from "./components/ChangePassword";
 import UserLogin from "./components/user/UserLogin";
 import UserProfile from "./components/user/UserProfile";
 import Footer from "./components/ui/shared/Footer";
+import LoanGuarantor from "./components/Guarantors/LoanGuarantor";
 
 function App() {
 
@@ -36,6 +37,7 @@ function App() {
         <Route path="/user/:id/change-password" element = {<ChangePassword/>} />
         <Route path="/user/login" element = {<UserLogin />} />
         <Route path="/profile/user/:id" element = {<UserProfile />} />
+        <Route path="/loan/:id/guarantors" element = {<LoanGuarantor />} />
 
       </Routes>
 
