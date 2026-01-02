@@ -28,7 +28,7 @@ const GuarantorsForm = () => {
       <div className='grid grid-cols-1 lg:grid-cols-2 gap-5'>
 
         {/* Guarantor #1 */}
-        <div className='border p-6 rounded-lg flex flex-col gap-5'>
+        <div className='border p-6 rounded-lg flex flex-col gap-5 '>
           <h2 className='text-center text-xl font-semibold '>Guarantor #01</h2>
 
             <div className='flex flex-col gap-5' >

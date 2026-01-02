@@ -16,7 +16,6 @@ const guarantorSchema = z.object({
 // Main form schema
 
 export const userLoanGuarantorFormSchema = z.object({
-  loanId: z.string().min(1, "Loan ID is required"),
   guarantors: z
     .array(guarantorSchema)
     .length(2, "Exactly two guarantors are required"),
