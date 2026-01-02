@@ -24,7 +24,9 @@ const useLoanGuarantor = () => {
                 guarantors: formData.guarantors 
             }
             
-            const res = await axios.post(`http://localhost:5000/api/guarantor` , payload , {headers: {"Authorization" : `Bearer ${user?.token}` }  } )
+            const res = await axios.post(`http://localhost:5000/api/guarantor` , payload , {headers: {"Content-Type": "application/json" , "Authorization" : `Bearer ${user?.token}` } , withCredentials: true } )
+
+            console.log("Guarantor response: " , res)
         
         }
 
