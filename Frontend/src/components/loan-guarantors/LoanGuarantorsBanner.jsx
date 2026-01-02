@@ -3,7 +3,7 @@ import { Badge } from "../ui/badge";
 
 const LoanGuarantorsBanner = () => {
   return (
-    <div className="py-12" >
+    <div  >
     <div className="bg-blue-50 flex flex-col gap-5 rounded-xl shadow-md p-8 text-center max-w-4xl mx-auto ">
       {/* Heading */}
       <h1 className="text-3xl font-bold text-blue-700">
@@ -32,7 +32,7 @@ const LoanGuarantorsBanner = () => {
       <div className="bg-green-100 flex flex-col gap-3 border-l-4 border-green-500 p-4 rounded-lg">
         <p className="text-xl font-semibold text-green-700">حدیثِ مبارک</p>
         <p className="text-gray-800 text-lg">اَلزَّعِيمُ غَارِمٌ</p>
-        <p className="text-gray-700">
+        <p className="text-gray-700 text-center">
           ضامن اپنی ضمانت کی ذمہ داری اٹھاتا ہے۔  
           <span className="italic">— سنن ابو داؤد، حدیث 3561</span>
         </p>

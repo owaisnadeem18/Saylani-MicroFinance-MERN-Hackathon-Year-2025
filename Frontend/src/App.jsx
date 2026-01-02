@@ -9,7 +9,7 @@ import ChangePassword from "./components/ChangePassword";
 import UserLogin from "./components/user/UserLogin";
 import UserProfile from "./components/user/UserProfile";
 import Footer from "./components/ui/shared/Footer";
-import LoanGuarantor from "./components/Guarantors/LoanGuarantor";
+import LoanGuarantor from "./components/loan-guarantors/LoanGuarantor";
 
 function App() {
 
