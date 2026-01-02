@@ -1,13 +1,37 @@
 import axios from 'axios'
 import React, { useState } from 'react'
+import { useSelector } from 'react-redux'
 
 const useLoanGuarantor = () => {
 
     const [loading , setLoading] = useState(false)
     const [guarantors, setGuarantors] = useState([])
+
+    // get info from the redux store.
+
+    const user = useSelector(state => state?.auth?.user)
+
+    // also get 
     
-    const addGuarantor = async (guarantor) => {
-        const res = await axios.post(`http://localhost:5000/api/guarantor`  )
+    const addGuarantor = async (formData , loanId) => {
+
+        try {
+
+            setLoading(true)
+            
+            const payload = {
+                loanId,
+                guarantors: formData.guarantors 
+            }
+            
+            const res = await axios.post(`http://localhost:5000/api/guarantor` , payload , {headers: {"Authorization" : `Bearer ${user?.token}` }  } )
+        
+        }
+
+        catch (err) {
+            console.log(err)
+        }
+        
     }
 
     return {
