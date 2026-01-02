@@ -36,7 +36,7 @@ const useLoginForm = () => {
                                                                                                                    
   } catch (err) {
     console.log(err)
-    toast.error(err?.response?.data?.message || "Something went wrong ! ");
+    toast.error(err?.response?.data?.message || err?.message);
   } finally {
     setLoading(false);
   }                                                                              

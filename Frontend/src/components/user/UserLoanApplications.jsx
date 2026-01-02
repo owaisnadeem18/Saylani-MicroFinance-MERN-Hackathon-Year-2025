@@ -30,8 +30,6 @@ const UserLoanApplications = () => {
     rejected: "bg-red-500 text-white",
   };
 
-  console.log("The loans are => ", loans)
-
   return (
     <div className="container mx-auto max-w-7xl px-10 py-12">
  <Card className="shadow-sm">
@@ -43,9 +41,11 @@ const UserLoanApplications = () => {
 
         <CardContent>
           <Table>
+            {loans.length > 0 &&
             <TableCaption>
               List of all loan applications submitted by you
             </TableCaption>
+            }
 
             <TableHeader>
               <TableRow>
@@ -72,6 +72,15 @@ const UserLoanApplications = () => {
                     </TableCell>
                   </TableRow>
                 ) : 
+
+                  loans.length === 0 ? (
+                  <TableRow>
+                    <TableCell colSpan={7} className="text-center py-5 font-semibold" >
+                      You have not applied for any loans yet.
+                    </TableCell>
+                  </TableRow>
+                ) :
+
                  loans?.map((loan) => (
                 <TableRow key={loan._id}>
                   <TableCell className="font-medium">{loan.category}</TableCell>

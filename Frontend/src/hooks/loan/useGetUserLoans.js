@@ -4,7 +4,7 @@
 
   const useGetUserLoans = (userId) => {
     const [loading, setLoading] = useState(false);
-    const [loans, setLoans] = useState(null);
+    const [loans, setLoans] = useState([]);
 
     const token = useSelector((state) => state?.auth?.token);
 
@@ -18,7 +18,7 @@
 
         console.log(res);
 
-        setLoans(res.data.totalLoanApplications);
+        setLoans(res.data.totalLoanApplications || []);
 
         console.log(res.data.totalLoanApplications);
 

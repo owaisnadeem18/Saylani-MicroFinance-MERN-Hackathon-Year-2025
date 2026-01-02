@@ -33,8 +33,6 @@ const LoanApplicationForm = () => {
 
     const onSubmit = async (data) => {
 
-        alert("Submitted")
-
         try {
             const apiResponse = await LoanFormHandler(data)
 

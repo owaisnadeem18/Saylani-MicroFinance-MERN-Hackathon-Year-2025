@@ -45,8 +45,6 @@ const UserLogin = () => {
             
             dispatch(setUser({user: res?.userExists , token: res?.token}))
 
-            
-
             console.log(res?.userExists , " <= is the user exists") 
 
             reset()
@@ -55,8 +53,9 @@ const UserLogin = () => {
             if (res?.userExists?.mustChangePassword) {  
                 // It will tell the user that this is compulsory to change the password if it's (must change password is true)
                 navigate(`/user/${res?.userExists.id}/change-password`)
+           } else { 
+                navigate(`/profile/user/${res?.userExists.id}`)
            }
-
         }
 
         }
