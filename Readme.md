@@ -13,7 +13,7 @@ It eliminates paperwork, enables instant verification, guarantor approval & admi
 
 | Layer | Technologies |
 |------|--------------|
-| Frontend | React.js, React Router, Context API, Axios |
+| Frontend | React.js, React Router, Redux Toolkit Store, Axios |
 | Backend | Node.js, Express.js |
 | Database | MongoDB + Mongoose |
 | Auth | JWT + bcrypt |
@@ -115,9 +115,8 @@ Landing Page → Loan Calculator → Register → Login
 │
 └── frontend
     ├── components/
-    ├── pages/
-    ├── context/
     └── App.jsx
+    └── store.js
 ```
 
 ---
