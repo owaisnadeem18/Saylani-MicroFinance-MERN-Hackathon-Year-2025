@@ -61,7 +61,7 @@ export const guarantorsInfo = async (req , res) => {
         )
 
         return res.status(201).json({
-            message: "Guarantor details saved successfully",
+            message: "Guarantor details submitted. Your loan application is now under review.",
             guarantors: guarantorsArray.map(info => ({
                 id: info._id,
                 Name: info.Name,

@@ -75,7 +75,7 @@ export const applyForLoan = async (req, res) => {
 
     return res.status(201).json({
         success: true ,
-        message: "Loan Application Submitted Successfully",
+        message: "Loan submitted. Add guarantor details to continue",
         loanId: NewLoanApplication._id,
         tokenNumber: NewLoanApplication.tokenNumber,
         appointment: appointment,
