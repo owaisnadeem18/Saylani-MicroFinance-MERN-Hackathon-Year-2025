@@ -7,7 +7,7 @@ import { Label } from "../ui/label";
 import { Textarea } from "../ui/textarea";
 import { Button } from "../ui/button";
 import useLoanGuarantor from "@/hooks/guarantor/useLoanGuarantor";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 
 const GuarantorsForm = () => {
@@ -15,6 +15,8 @@ const GuarantorsForm = () => {
   const { loading, guarantors, addGuarantor } = useLoanGuarantor();
 
   const params = useParams()
+  
+  const navigate = useNavigate()
 
   const id = params?.id
 
@@ -41,11 +43,11 @@ const GuarantorsForm = () => {
 
       toast.success(res?.message)
 
+      navigate(`profile/user/${id}`)
+
     }
 
     console.log("Guarantor Form Data: ", data);
-
-
 
   };
 
