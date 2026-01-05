@@ -1,6 +1,7 @@
 import axios from 'axios'
 import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
+import { toast } from 'react-toastify'
 
 const useLoanGuarantor = () => {
 
@@ -37,7 +38,9 @@ const useLoanGuarantor = () => {
         }
 
         catch (err) {
-            console.log(err)
+            console.log(err.response.data.message)
+            toast.error(err.response.data.message)
+
         }
         
         finally {

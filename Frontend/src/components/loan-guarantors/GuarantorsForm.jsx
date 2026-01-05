@@ -9,29 +9,37 @@ import { Button } from "../ui/button";
 import useLoanGuarantor from "@/hooks/guarantor/useLoanGuarantor";
 import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
+import { Spinner } from "../ui/spinner";
+import { useSelector } from "react-redux";
 
 const GuarantorsForm = () => {
 
-  const { loading, guarantors, addGuarantor } = useLoanGuarantor();
+  const { loading, guarantors , addGuarantor } = useLoanGuarantor();
 
   const params = useParams()
+
+  const loanId = params.id
   
   const navigate = useNavigate()
 
-  const id = params?.id
+  // Now , here we need to get the user id from the redux store:  
 
-  const {
-    register,
+  const id = useSelector(state => state?.auth?.user?.id)
+
+  const {  
+    register,                         
     handleSubmit,
-    reset,
+    reset,                          
     formState: { errors },
   } = useForm({
     resolver: zodResolver(userLoanGuarantorFormSchema),
   });
-
+        
   const onSubmit = async (data) => {
     
-    const res = await addGuarantor(data , id)
+    const res = await addGuarantor(data , loanId)
+
+    console.log("Response is =>> " , res)
     
     if (res?.success) {
     
@@ -39,16 +47,18 @@ const GuarantorsForm = () => {
 
       console.log("Guarantors added successfully: ", res?.guarantors);  
 
-      console.log("Response message: ", res?.message);
+      console.log("Response message: ", res?.message); 
 
-      toast.success(res?.message)
+      toast.success(res?.message)          
 
-      navigate(`profile/user/${id}`)
+      navigate(`/profile/user/${id}`)
 
+    } else {
+      toast.error(res?.message)
     }
-
+         
     console.log("Guarantor Form Data: ", data);
-
+   
   };
 
   return (
@@ -67,7 +77,7 @@ const GuarantorsForm = () => {
                   {...register("guarantors.0.Name")}
                 />
                 {errors.guarantors?.[0]?.Name && (
-                  <p className="text-red-500 text-sm">
+                  <p className="text-red-500 text-sm">                   
                     {errors.guarantors[0].Name.message}
                   </p>
                 )}
@@ -209,11 +219,22 @@ const GuarantorsForm = () => {
           type="submit"
           className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 w-full sm:w-auto cursor-pointer text-lg"
         >
-          Submit Guarantors
+          {
+            loading ? 
+            
+            <div className="flex justify-center items-center gap-3" >
+              <Spinner/>
+              <div className="animate-pulse" >
+                Submitting
+              </div>
+            </div>
+            
+            : "Submit Guarantors"
+          }
         </Button>
       </div>
-    </form>
+    </form>          
   );
-};
+};  
 
 export default GuarantorsForm;
