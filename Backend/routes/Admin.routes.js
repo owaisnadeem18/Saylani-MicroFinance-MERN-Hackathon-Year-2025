@@ -7,14 +7,12 @@ const router = express.Router()
 
 // ----------------------------------------------------------------------------------------- 1 ----------------------------------------------------------------------------
 // Get all loans applications (for admin) view
-router.get("/loans" , authMiddleware , adminMiddleware , getAllLoans)
+router.get("/admin/loans" , authMiddleware , adminMiddleware , getAllLoans)
 
 // ----------------------------------------------------------------------------------------- 2 ----------------------------------------------------------------------------
 // Update the status of a loan application (approve or reject)
-router.put("/loans/:id/status" , authMiddleware , adminMiddleware , updateStatus)
-
+router.put("/admin/loans/:id/status" , authMiddleware , adminMiddleware , updateStatus)
 // ----------------------------------------------------------------------------------------- 3 ----------------------------------------------------------------------------
-router.post("/loans/:id/qrcode" , authMiddleware , adminMiddleware , generateQRcode)
+router.post("/admin/loans/:id/qrcode" , authMiddleware , adminMiddleware , generateQRcode)
                                                                               
 export default router    
-                               
