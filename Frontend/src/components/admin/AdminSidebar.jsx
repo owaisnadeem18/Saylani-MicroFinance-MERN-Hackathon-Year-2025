@@ -1,19 +1,25 @@
 import { saylaniLogo } from '@/assets'
 import { headerItems } from '@/data/adminSidebarLinks'
 import { LogOutIcon } from 'lucide-react'
-import React from 'react'
-import { Link, useLocation } from 'react-router-dom'
+import React, { useState } from 'react'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
+import LogoutModal from '../ui/modals/LogoutModal'
+import { useDispatch } from 'react-redux'
+import { clearUser } from '@/features/auth/authSlice'
+import { handleLogout } from '@/utils/handlers/logoutHandler'
+// import { clearUser } from '@/features/auth/authSlice'
 
 const AdminSidebar = () => {
 
-  // Here, I need to check my path
+  const [isLoggedOut , setIsLoggedOut] = useState(false)
 
+  // Here, I need to check my path
   const location = useLocation()
 
   const path = location.pathname
 
-  console.log("path name is => ", path)
-
+  const dispatch = useDispatch()   
+  const navigate = useNavigate()
 
   return (
     <div className='transition-all ease-in-out duration-500  h-dvh fixed top-0 left-0 w-full lg:w-[300px]' >
@@ -64,7 +70,7 @@ const AdminSidebar = () => {
               </nav>
 
               {/* Logout Icon */}
-              <div className='flex justify-start text-white text-sm font-medium' >
+              <div className='flex justify-start text-white text-sm font-medium' onClick={() => setIsLoggedOut(true)} >
                 <div className='flex items-center rounded-full gap-2 cursor-pointer hover:bg-white/20 transition px-4 py-2' >
                   <LogOutIcon />
                   <h1 className='text-[16px]' >
@@ -81,6 +87,10 @@ const AdminSidebar = () => {
 
 
       </div>
+
+      {
+        isLoggedOut && <LogoutModal open={isLoggedOut} onClose= { () => setIsLoggedOut(false)} onConfirm={() => handleLogout(dispatch , navigate)} />
+      }
 
     </div>
   )
