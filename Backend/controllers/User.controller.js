@@ -194,7 +194,7 @@ export const loginUser = async (req, res) => {
     // respond with token & user info:
 
     return res.status(200).json({
-      message: "User logged In Successfully ! ",
+      message: `${userExists?.role} logged In Successfully ! `,
       success: true,
       token,
       userExists: {
@@ -202,7 +202,6 @@ export const loginUser = async (req, res) => {
         token: token,
         Name: userExists.Name,
         Email: userExists.Email,
-        Password: userExists.Password,
         CNIC: userExists.CNIC,
         Role: userExists.role,
         mustChangePassword: userExists.mustChangePassword,
