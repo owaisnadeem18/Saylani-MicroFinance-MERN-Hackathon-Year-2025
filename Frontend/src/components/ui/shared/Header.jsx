@@ -5,7 +5,7 @@ import {
   PopoverGroup,
 } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { saylaniLogo } from "@/assets"; 
 import { LogIn, LogOut, User2 } from "lucide-react";
 import { useDispatch, useSelector } from "react-redux";
@@ -25,6 +25,9 @@ export default function Header() {
     // { name: "Admin", path: "/admin" },
   ];
   const dispatch = useDispatch();
+
+  const navigate = useNavigate() 
+
   const user = useSelector(state => state?.auth?.user)
 
   return (
@@ -142,7 +145,7 @@ export default function Header() {
                   <LogOut />
                   <Button
                     variant={"link"}
-                    onClick={() => handleLogout(dispatch)}
+                    onClick={() => handleLogout(dispatch , navigate)}
                     className={"mx-2 p-0 cursor-pointer hover:text-red-500"}
 
                   >
@@ -233,7 +236,7 @@ export default function Header() {
         <Button
           variant="link"
           onClick={() => {
-            handleLogout(dispatch);
+            handleLogout(dispatch , navigate);
             setMobileMenuOpen(false);
           }}
           className="flex items-center justify-start gap-2 p-0 text-sm text-red-500"

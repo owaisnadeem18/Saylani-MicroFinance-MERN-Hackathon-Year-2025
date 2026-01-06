@@ -27,9 +27,9 @@ const GuarantorsForm = () => {
   const id = useSelector(state => state?.auth?.user?.id)
 
   const {  
-    register,                         
+    register,
     handleSubmit,
-    reset,                          
+    reset,
     formState: { errors },
   } = useForm({
     resolver: zodResolver(userLoanGuarantorFormSchema),

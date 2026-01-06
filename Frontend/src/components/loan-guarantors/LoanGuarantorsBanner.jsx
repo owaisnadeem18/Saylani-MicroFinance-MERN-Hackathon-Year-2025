@@ -9,7 +9,7 @@ const LoanGuarantorsBanner = () => {
       <h1 className="text-3xl font-bold text-blue-700">
         Step 2: Guarantor Details
       </h1>
-
+                        
       {/* Description */}
       <p className="text-gray-700 text-lg">
         To complete your loan application, please provide details of <strong>two trustworthy guarantors</strong>.
@@ -20,10 +20,10 @@ const LoanGuarantorsBanner = () => {
       <div className="bg-white flex flex-col gap-3 p-4 rounded-lg shadow-sm">
         <p className="text-gray-800 font-medium">Each guarantor should provide:</p>
         <div className="list-disc list-inside text-gray-700 flex gap-4 justify-center items-center flex-wrap" >
-          <Badge>Full Name</Badge>
+          <Badge>Full Name</Badge>        
           <Badge>CNIC</Badge>
           <Badge>Email Address</Badge>
-          <Badge>Phone Number</Badge>
+          <Badge>Phone Number</Badge>          
           <Badge>Address</Badge>
         </div>
       </div>
@@ -37,7 +37,7 @@ const LoanGuarantorsBanner = () => {
           <span className="italic">— سنن ابو داؤد، حدیث 3561</span>
         </p>
       </div>
-    </div>
+    </div>        
 
     </div>
   );
