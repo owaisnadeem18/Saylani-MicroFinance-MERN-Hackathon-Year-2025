@@ -5,4 +5,4 @@ export const handleLogout = (dispatch , navigate) => {
     dispatch(clearUser())
     navigate(`/`) 
     toast.success("Logged Out Successfully")
-}
+}      
