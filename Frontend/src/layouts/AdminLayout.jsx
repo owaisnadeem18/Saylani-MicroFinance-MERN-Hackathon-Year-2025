@@ -5,11 +5,11 @@ const AdminLayout = () => {
   return (
     <div className="flex min-h-screen">
 
-      <div className="w-[15%] bg-gray-800 text-white">
+      <div className="flex-none w-[300px] bg-[#024D9A] text-white">
         <AdminSidebar/>
       </div>
 
-      <div className="w-[85%] p-6">
+      <div className="flex-1 p-6">
         <Outlet />
       </div>
 
