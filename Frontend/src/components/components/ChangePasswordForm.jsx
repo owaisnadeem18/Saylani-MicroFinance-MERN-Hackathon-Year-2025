@@ -1,0 +1,192 @@
+import { changePasswordSchema } from '@/utils/schemas/user/UserChangePasswordSchema'
+import { zodResolver } from '@hookform/resolvers/zod'
+import React, { useState } from 'react'
+import { useForm } from 'react-hook-form'
+import { Label } from './ui/label'
+import { Input } from './ui/input'
+import { Button } from './ui/button'
+import { EyeIcon, EyeOff } from 'lucide-react'
+import { useDispatch, useSelector } from 'react-redux'
+import { store } from '@/store'
+import useChangePassword from '@/hooks/user/useChangePassword'
+import { toast } from 'react-toastify'
+import { setUser, updateMustChangePassword } from '@/features/auth/authSlice'
+import { useNavigate } from 'react-router-dom'
+
+const ChangePasswordForm = () => {
+
+    // Now, here we have to call the custom hook , which has been created to change password: 
+
+    const {loading , changePasswordHandler} = useChangePassword()                                                                                                     
+
+    const mustChangePassword = useSelector(
+  state => state.auth.user?.mustChangePassword
+)
+
+    console.log("Must change password field is => " , mustChangePassword)
+
+    const dispatch = useDispatch()
+                                      
+    const navigate = useNavigate()
+    
+    const [showCurrentPassword, setShowCurrentPassword] = useState(false);
+    const [showNewPassword, setShowNewPassword] = useState(false);
+    const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
+    const {
+        register,  
+        handleSubmit,
+        reset,
+        formState: { errors },
+    } = useForm({
+        resolver: zodResolver(changePasswordSchema(mustChangePassword)),
+    });
+
+    // mustChangePassword could be accessed with the help of redux toolkit: 
+
+    const onSubmit = async (data) => {
+        
+        try {
+            const res = await changePasswordHandler(data)
+
+            console.log("NEw response debugging is => " , res)
+
+            if (res?.success) {
+
+                console.log("overall response => " , res)
+                console.log("User exists ? " , res?.user)
+
+                dispatch(updateMustChangePassword(res.user.mustChangePassword))
+                
+
+                console.log("Set user is => " , setUser)
+
+                reset()
+                console.log(res)             
+                
+                if (!mustChangePassword) {
+                    navigate("/apply-for-loan")                                           
+                } 
+            
+            }
+            
+            console.log(data); 
+        }
+ 
+        catch (err) {
+            console.log(err)
+            toast.error(err)
+        } 
+
+    };
+
+    return (
+        <form
+            onSubmit={handleSubmit(onSubmit)}
+            className="grid gap-4 max-w-xl m-auto p-8 rounded-xl box-shadow"
+        >
+
+            {/* we only have to show this field , if the user did not change the system generated password so far */}
+
+            {
+                !mustChangePassword && 
+                (
+
+                        
+            // current password: 
+                    
+            <div className="grid gap-2">
+                <Label htmlFor="currentPassword">Current Password</Label>
+                <Input
+                    type={showCurrentPassword ? "text" : "password"}
+                    id="currentPassword"
+                    placeholder="Enter Current Password"
+                    {...register("currentPassword")}
+                    eyeIcon={
+                        <span onClick={() => setShowCurrentPassword(!showCurrentPassword)} >
+
+                            {
+                                showCurrentPassword ?
+                                <EyeOff size={20} />
+                                :
+                                <EyeIcon
+                                size={20}
+                                /> 
+                            }
+                        </span>
+                    }
+                    />
+                {errors.currentPassword && (
+                    <p className="text-red-500 text-sm">
+                        {errors.currentPassword.message}
+                    </p>
+                )}
+            </div>
+                )
+            
+            }
+
+            {/* New Password */}
+            <div className="grid gap-2">
+                <Label htmlFor="newPassword">New Password</Label>
+                <Input
+                    type={showNewPassword ? "text" : "password"}
+                    id="newPassword"
+                    placeholder="Enter New Password"
+                    {...register("newPassword")}
+                    eyeIcon={
+                        <span onClick={() => setShowNewPassword(!showNewPassword)} >
+                            
+                            {
+                                showNewPassword ? <EyeOff size={20} /> : 
+                            <EyeIcon
+                                size={20}
+                                onClick={() => setShowNewPassword(!showNewPassword)}
+                            />
+                            }
+                        </span>
+                    }
+                />
+                {errors.newPassword && (
+                    <p className="text-red-500 text-sm">{errors.newPassword.message}</p>
+                )}
+            </div>
+
+            {/* Confirm Password */}
+            <div className="grid gap-2">
+                <Label htmlFor="confirmNewPassword">Confirm New Password</Label>
+                <Input
+                    type={showConfirmPassword ? "text" : "password"}
+                    id="confirmNewPassword"
+                    placeholder="Confirm New Password"
+                    {...register("confirmNewPassword")}
+                    eyeIcon={
+                        <span onClick={() => setShowConfirmPassword(!showConfirmPassword)} >
+                            {
+                                showConfirmPassword ?
+                                <EyeOff size={20} /> : 
+                        <EyeIcon
+                        size={20}
+                        />
+                        }
+                            </span>
+                    }
+                />
+                {errors.confirmNewPassword && (
+                    <p className="text-red-500 text-sm">
+                        {errors.confirmNewPassword.message}
+                    </p>
+                )}
+            </div>
+                           
+            <Button type="submit" className="cursor-pointer">
+                {
+                    loading ?
+                    "loading..." : "Change Password" 
+                } 
+            </Button>
+        </form>
+    );
+};
+
+export default ChangePasswordForm
