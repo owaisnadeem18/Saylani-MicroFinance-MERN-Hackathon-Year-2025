@@ -16,22 +16,22 @@ export const getAllLoans = async (req, res) => {
   try {
     // We have to get all the loans whose are present in the DB:
 
-    const loans = await Loan.find().sort({ createdAt: -1 }).populate("userId" , "Name Email CNIC").lean();
+    const loans = await Loan.find().populate("userId" , "Name Email CNIC").lean();
 
     if (loans.length == 0) {
       return res.status(200).json({        
         success: true,
         message: "No Loans Application ! ",
-      });
+      });      
     }
 
     return res.status(200).json({
-      success: true,
+      success: true,          
       totalApplications: loans.length,
       loans,
     });
   } catch (err) {
-    return res.status(500).json({
+    return res.status(500).json({  
       message: "Internal Server Error",
       success: false,
       error: err.message,
