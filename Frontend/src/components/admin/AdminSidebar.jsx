@@ -29,7 +29,7 @@ const AdminSidebar = () => {
 
   return (
     <div
-      className={`transition-all ease-in-out duration-500  h-dvh fixed top-0 left-0 ${menu ? "w-full lg:w-[300px]" : "w-16 md:w-20"
+      className={`transition-all ease-in-out duration-500 h-dvh fixed  top-0 left-0 ${menu ? "w-full lg:w-[300px]" : "w-16 md:w-20"
         }`} >
       <div className='absolute flex mx-auto top-0 left-0  right-0 bottom-0 my-auto  h-full w-full' >
 
@@ -63,8 +63,8 @@ const AdminSidebar = () => {
 
                     return (
 
-                      <Link to={item?.route} className='w-full' >
-                        <div className={`px-4 py-2 cursor-pointer flex gap-2 items-center rounded-full ${isActive ? "bg-white text-[#024d9a]" : "hover:bg-white/20"} `} key={index} >
+                      <Link to={item?.route} className= {`${menu ? "w-full lg:w-3/4" : "w-fit rounded-full"}`} >
+                        <div className={`px-4 py-2 cursor-pointer flex gap-2 items-center rounded-full ${isActive ? "bg-white text-[#024d9a]" : "hover:bg-white/20"} ${menu ? "" : "w-[50px] h-[50px]"} `} key={index} >
                           <item.icon />
                           {
                             menu &&
