@@ -3,20 +3,13 @@ import { adminTableHeaders } from '@/data/AdminLoansTableHeader';
 import useGetAllLoans from '@/hooks/admin/useGetAllLoans';
 import React from 'react'
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
-import { CheckCircle, Cross, EyeIcon, MoreHorizontalIcon, X } from 'lucide-react';
+import { EyeIcon, MoreHorizontalIcon } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
-import { Badge } from '@/components/ui/badge';
 
 const AdminLoansTable = () => {
 
   const { loans, loading } = useGetAllLoans();
   const navigate = useNavigate();
-
-  const statusStyles = {
-    pending: "bg-yellow-500 text-white",
-    approved: "bg-green-500 text-white",
-    rejected: "bg-red-500 text-white",
-  };
 
   return (
     <div className="w-full h-auto rounded-md border border-gray-200 ">
