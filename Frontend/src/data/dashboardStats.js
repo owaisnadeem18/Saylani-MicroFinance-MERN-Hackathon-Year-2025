@@ -1,6 +1,6 @@
 export const stats = [
-  { title: "Total Loans", value: 120 },
-  { title: "Pending", value: 45 },
-  { title: "Approved", value: 60 },
-  { title: "Rejected", value: 15 },
+  { title: "Total Loan Applications", value: 120 },
+  { title: "Pending Applications", value: 45 },
+  { title: "Approved Applications", value: 60 },
+  { title: "Rejected Applications", value: 15 },
 ];

@@ -7,7 +7,7 @@ const LogoutModal = ({ open, onClose, onConfirm }) => {
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
-      <div className="bg-white rounded-xl shadow-lg w-[30%] max-w-sm p-8 flex flex-col gap-4">
+      <div className="bg-white rounded-xl shadow-lg max-w-sm p-8 flex flex-col gap-4 mx-4">
 
         <div className="bg-blue-600 flex justify-center p-5 w-fit mx-auto rounded-full" >
           <LogOutIcon className="w-8 h-auto" />
