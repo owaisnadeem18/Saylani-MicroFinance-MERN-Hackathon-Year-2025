@@ -1,4 +1,4 @@
-import AdminSidebar from "@/components/admin/AdminSidebar";
+import AdminSidebar from "@/components/admin/dashboard/AdminSidebar";
 import { useSelector } from "react-redux";
 import { Outlet } from "react-router-dom";
 
@@ -17,7 +17,7 @@ const AdminLayout = () => {
 
       <div className="flex-1 p-6">
         <Outlet />
-      </div>
+      </div>  
 
     </div>
   );

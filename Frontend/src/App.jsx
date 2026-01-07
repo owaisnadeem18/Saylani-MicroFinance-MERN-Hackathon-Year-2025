@@ -10,8 +10,8 @@ import UserProfile from "./components/user/UserProfile";
 import LoanGuarantor from "./components/loan-guarantors/LoanGuarantor";
 import UserLayout from "./layouts/UserLayout";
 import AdminLayout from "./layouts/AdminLayout";
-import AdminDashboard from "./components/admin/AdminDashboard";
-import AdminLoans from "./components/admin/AdminLoans";
+import AdminDashboard from "./components/admin/dashboard/AdminDashboard";
+import AdminLoans from "./components/admin/loans/AdminLoans";
 
 function App() {
 
