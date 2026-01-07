@@ -12,6 +12,7 @@ import UserLayout from "./layouts/UserLayout";
 import AdminLayout from "./layouts/AdminLayout";
 import AdminDashboard from "./components/admin/dashboard/AdminDashboard";
 import AdminLoans from "./components/admin/loans/AdminLoans";
+import AdminApprovedLoans from "./components/admin/loans/AdminApprovedLoans";
 
 function App() {
 
@@ -49,6 +50,7 @@ function App() {
         <Route path="/admin" element = {<AdminLayout/>} >
           <Route path="dashboard" element = {<AdminDashboard/>} />
           <Route path="loans" element = {<AdminLoans/>} />
+          <Route path="approved-loans" element = {<AdminApprovedLoans/>} />
         </Route>                  
 
       </Routes>
