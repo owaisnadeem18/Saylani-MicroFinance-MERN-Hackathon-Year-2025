@@ -18,8 +18,6 @@ const useGetAllLoans = () => {
 
       setLoans(res?.data?.loans)
 
-      setTableHeader(res?.data?.loans[0])
-
     }
     catch (err) {
       console.log(err)

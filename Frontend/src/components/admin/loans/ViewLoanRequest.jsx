@@ -3,21 +3,40 @@ import { Badge } from "@/components/ui/badge";
 import { Calendar, Clock, MapPin, User, FileText } from "lucide-react";
 import useGetAllLoans from "@/hooks/admin/useGetAllLoans";
 import { useParams } from "react-router-dom";
+import { Spinner } from "@/components/ui/spinner";
 
 const ViewLoanRequest = () => {
 
   // Here, we just simply need to call the custom hook in order to get all the APIs:
 
-  const {loans , loading} = useGetAllLoans()
+  const { loans, loading } = useGetAllLoans()
 
   const params = useParams()
 
   const loanId = params.id
-  
 
-  const loan = loans?.filter(loan => loan?._id == loanId)
+  const loan = loans?.find(loan => loan?._id == loanId)
 
   console.log(loan)
+
+  console.log(loan?.userId?.Name)
+
+
+  const statusStyles = {
+    pending: "bg-yellow-500 text-white",
+    approved: "bg-green-500 text-white",
+    rejected: "bg-red-500 text-white",
+  };
+
+
+  // Here, we need to create a helper function to implement every field in this API with loader:
+
+  const Field = ({ loading, value }) => {
+    if (loading) return <Spinner />
+
+    return <p className="font-medium">{value}</p>;
+
+  }
 
   return (
     <div className="flex flex-col gap-8">
@@ -29,12 +48,12 @@ const ViewLoanRequest = () => {
             Loan Application Details
           </h1>
           <p className="text-sm text-gray-600">
-            Review complete information related to this loan request.
+            Review complete information related to this loan request of <span className="text-[#024D9A] font-semibold" > {loan?.userId?.Name} </span>.
           </p>
         </div>
 
-        <Badge >                         
-          Approved
+        <Badge className={`${statusStyles[loan?.status]} p-2 font-semibold text-sm`} >
+          <Field loading={loading} value={loan?.status} />
         </Badge>
       </div>
 
@@ -48,17 +67,24 @@ const ViewLoanRequest = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-sm">
           <div>
             <p className="text-gray-500">Full Name</p>
-            <p className="font-medium">Owais Nadeem</p>
+
+            <Field value={loan?.userId?.Name} loading={loading} />
+
           </div>
 
           <div>
             <p className="text-gray-500">CNIC</p>
-            <p className="font-medium">42201-7674302-9</p>
+
+            <Field value={loan?.userId?.CNIC} loading={loading} />
+
           </div>
 
           <div>
             <p className="text-gray-500">Email Address</p>
-            <p className="font-medium">owaisnadeem15@gmail.com</p>
+            <p className="font-medium"></p>
+
+            <Field value={loan?.userId?.Email} loading={loading} />
+
           </div>
         </div>
       </div>
@@ -73,22 +99,28 @@ const ViewLoanRequest = () => {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6 text-sm">
           <div>
             <p className="text-gray-500">Category</p>
-            <p className="font-medium">Home Construction Loans</p>
+
+            <Field value={loan?.category} loading={loading} />
+
           </div>
 
           <div>
             <p className="text-gray-500">Sub Category</p>
-            <p className="font-medium">Finishing</p>
+            <Field value={loan?.subcategory} loading={loading} />
           </div>
 
           <div>
             <p className="text-gray-500">Loan Amount</p>
-            <p className="font-medium">123,400</p>
+            <Field loading={loading} value={loan?.loanAmount.toLocaleString("en-IN")} />
+
           </div>
 
           <div>
             <p className="text-gray-500">Loan Period</p>
-            <p className="font-medium">5 Years</p>
+
+            <Field value={loan?.loanPeriod + " Years"} loading={loading} />
+
+            <p className="font-medium"></p>
           </div>
         </div>
       </div>
@@ -105,15 +137,16 @@ const ViewLoanRequest = () => {
             <Calendar className="w-4 h-4 mt-1 text-gray-500" />
             <div>
               <p className="text-gray-500">Date</p>
-              <p className="font-medium">07 January 2026</p>
+              <Field loading={loading} value={new Date(loan?.appointment?.date).toLocaleDateString()} />
             </div>
           </div>
 
           <div className="flex items-start gap-2">
             <Clock className="w-4 h-4 mt-1 text-gray-500" />
+
             <div>
               <p className="text-gray-500">Time</p>
-              <p className="font-medium">11:00 AM</p>
+              <Field loading={loading} value={loan?.appointment?.time} />
             </div>
           </div>
 
@@ -121,9 +154,8 @@ const ViewLoanRequest = () => {
             <MapPin className="w-4 h-4 mt-1 text-gray-500" />
             <div>
               <p className="text-gray-500">Office Location</p>
-              <p className="font-medium">
-                Saylani Head Office, Bahadurabad, Karachi
-              </p>
+
+              <Field loading={loading} value={loan?.appointment?.officeLocation} />
             </div>
           </div>
         </div>
@@ -131,8 +163,8 @@ const ViewLoanRequest = () => {
 
       {/* ===== META INFO ===== */}
       <div className="text-xs text-gray-500 flex justify-between">
-        <span>Token Number: #1</span>
-        <span>Last Updated: 07 Jan 2026</span>
+        <span>Token Number: # {loan?.tokenNumber}</span>
+        <span>Last Updated: {new Date(loan?.updatedAt).toLocaleDateString()}</span>
       </div>
 
     </div>
