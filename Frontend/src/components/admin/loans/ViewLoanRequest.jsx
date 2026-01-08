@@ -1,9 +1,10 @@
 import React from "react";
 import { Badge } from "@/components/ui/badge";
-import { Calendar, Clock, MapPin, User, FileText } from "lucide-react";
+import { Calendar, Clock, MapPin, User, FileText, MoreHorizontalIcon, EyeIcon, CheckIcon, X } from "lucide-react";
 import useGetAllLoans from "@/hooks/admin/useGetAllLoans";
 import { useParams } from "react-router-dom";
 import { Spinner } from "@/components/ui/spinner";
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 
 const ViewLoanRequest = () => {
 
@@ -52,9 +53,34 @@ const ViewLoanRequest = () => {
           </p>
         </div>
 
-        <Badge className={`${statusStyles[loan?.status]} p-2 font-semibold text-sm`} >
-          <Field loading={loading} value={loan?.status} />
+        <div className="flex justify-center items-center gap-2" >
+
+        <Badge className={`${statusStyles[loan?.status]} p-2 font-semibold text-sm w-fit`} >
+          <Field loading={loading} value={loan?.status.charAt(0).toUpperCase() + loan?.status.slice(1)} />
         </Badge>
+
+                                  <Popover>
+                            <PopoverTrigger>
+                              <MoreHorizontalIcon className="cursor-pointer" aria-label="Loan actions" />
+                            </PopoverTrigger>
+                            <PopoverContent className={"w-fit p-1"}>
+                              <div className="flex items-start  flex-col justify-center gap-2 p-0">
+                                <div onClick={() => navigate(`/admin/loans/${loan._id}`)} className='flex gap-2 items-center cursor-pointer px-2 py-1 rounded-lg hover:bg-gray-100' >
+                                  <CheckIcon width={16} />
+                                  <span className="text-sm" >Accept</span>
+                                </div>
+
+                                <div onClick={() => navigate(`/admin/loans/${loan._id}`)} className='flex gap-2 items-center cursor-pointer px-2 py-1 rounded-lg hover:bg-gray-100' >
+                                  <X width={16} />
+                                  <span className="text-sm" >Reject</span>
+                                  
+                                </div>
+
+                              </div>
+                            </PopoverContent>
+                          </Popover>
+
+        </div>
       </div>
 
       {/* ===== APPLICANT INFO ===== */}
@@ -110,7 +136,7 @@ const ViewLoanRequest = () => {
           </div>
 
           <div>
-            <p className="text-gray-500">Loan Amount</p>
+            <p className="text-gray-500">Loan Amount</p>          
             <Field loading={loading} value={loan?.loanAmount.toLocaleString("en-IN")} />
 
           </div>
