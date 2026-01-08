@@ -1,6 +1,5 @@
 import React from 'react';
 import ApprovedLoansPageHeader from './ApprovedLoansPageHeader';
-import ApprovedLoansTable from './ApprovedLoansTable';
 import AdminLoansTable from './AdminLoansTable';
 import useGetAllLoans from '@/hooks/admin/useGetAllLoans';
 
