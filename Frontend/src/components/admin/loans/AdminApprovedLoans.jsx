@@ -15,13 +15,14 @@ const AdminApprovedLoans = () => {
       {/* Header */}
       <ApprovedLoansPageHeader />
 
-      {/* Table Section */}
+      {/* Table Section */}                                                        
       <div className="bg-white rounded-lg border border-gray-200">
         <AdminLoansTable data={approvedLoans} title={"All Approved Loans"} loading={loading} />
-      </div>
+      </div>                            
 
     </div>
   )
 }
 
-export default AdminApprovedLoans;
+export default AdminApprovedLoans;                                                                                                                                       
+                                                                                                                                                                                                                        

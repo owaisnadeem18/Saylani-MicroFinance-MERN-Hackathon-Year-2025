@@ -46,8 +46,9 @@ const AdminSidebar = () => {
   } , [dispatch])
 
   return (
+    <div className={`transition-all ease-in-out duration-500 flex-none ${menu ? "w-full lg:w-[300px]" : "w-16 md:w-20"} text-white`} >
     <div
-      className={`transition-all ease-in-out duration-500 h-dvh fixed  top-0 left-0 ${menu ? "w-full lg:w-[300px]" : "w-16 md:w-20"
+      className={`transition-all ease-in-out duration-500 h-dvh fixed  top-0 left-0 bg-[#024D9A] ${menu ? "w-full lg:w-[300px]" : "w-16 md:w-20"
         }`} >
       <div className='absolute flex mx-auto top-0 left-0  right-0 bottom-0 my-auto  h-full w-full' >
 
@@ -77,7 +78,7 @@ const AdminSidebar = () => {
 
                   headerItems.map((item, index) => {
 
-                    const isActive = path === item?.route
+                    const isActive = path.startsWith(item?.route)
 
                     return (
 
@@ -99,7 +100,7 @@ const AdminSidebar = () => {
               <div className='flex justify-start text-white text-sm font-medium' onClick={() => setIsLoggedOut(true)} >
                 <div className={`flex items-center rounded-full gap-2 cursor-pointer hover:bg-white/20 transition px-4 py-2 ${!menu && "w-[50px] h-[50px]"}`} >
                   <LogOutIcon />
-           
+
                   {
                     menu &&
                   <h1 className='text-[16px]' >
@@ -124,6 +125,7 @@ const AdminSidebar = () => {
       }
 
     </div>
+      </div>
   )
 }
 
