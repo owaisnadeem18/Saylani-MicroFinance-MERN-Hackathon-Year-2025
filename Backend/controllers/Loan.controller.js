@@ -29,7 +29,7 @@ export const applyForLoan = async (req, res) => {
     if (!userExists) {
       return res.status(404).json({
         success: false,
-        message: "User does not exist ! ",
+        message: "User does not exist ! ",                               
       });
     }
 

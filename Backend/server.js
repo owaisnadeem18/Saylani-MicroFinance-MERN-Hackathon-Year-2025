@@ -10,13 +10,13 @@ import cookieParser from "cookie-parser"
 
 
 const app = express() 
-
+     
 const PORT = 5000
-
+                                                        
 
 
 dotenv.config()
-connectDB()
+connectDB()                
 
 // Now , import Routes here :
 
@@ -34,7 +34,7 @@ app.use("/api/user" , userRoutes)
 app.use("/api/loan" , loanRoutes)
 app.use("/api/guarantor" , guarantorRoutes)
 app.use("/api/admin" , adminRoutes)
-
+            
 app.get(("/") , (req , res) => {
     res.send("Initialized the project")
 })
