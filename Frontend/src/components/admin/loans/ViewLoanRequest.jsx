@@ -12,6 +12,10 @@ const ViewLoanRequest = () => {
 
   const { loans, loading } = useGetAllLoans()
 
+  // Here , we need to call another hook to accept or reject the loan application: 
+  // const
+  
+
   const params = useParams()
 
   const loanId = params.id
@@ -28,6 +32,11 @@ const ViewLoanRequest = () => {
     approved: "bg-green-500 text-white",
     rejected: "bg-red-500 text-white",
   };
+
+  const loanStatus = [
+    {icon: <CheckIcon className="w-4 h-4" /> , text: "Accept" , loadingText: "Accepting" },
+    {icon: <X className="w-4 h-4" /> , text: "Reject" , loadingText: "Rejecting" },
+  ]
 
 
   // Here, we need to create a helper function to implement every field in this API with loader:
@@ -65,16 +74,19 @@ const ViewLoanRequest = () => {
                             </PopoverTrigger>
                             <PopoverContent className={"w-fit p-1"}>
                               <div className="flex items-start  flex-col justify-center gap-2 p-0">
-                                <div onClick={() => navigate(`/admin/loans/${loan._id}`)} className='flex gap-2 items-center cursor-pointer px-2 py-1 rounded-lg hover:bg-gray-100' >
-                                  <CheckIcon width={16} />
-                                  <span className="text-sm" >Accept</span>
-                                </div>
+                                {loanStatus?.map(status => 
 
-                                <div onClick={() => navigate(`/admin/loans/${loan._id}`)} className='flex gap-2 items-center cursor-pointer px-2 py-1 rounded-lg hover:bg-gray-100' >
-                                  <X width={16} />
-                                  <span className="text-sm" >Reject</span>
-                                  
+                                <div className='flex gap-2 items-center cursor-pointer px-2 py-1 rounded-lg hover:bg-gray-100' >
+                                  <div>
+                                     {status?.icon}                                 
+                                  </div>
+                                  <span className="text-sm" >
+                                    {status?.text}
+                                  </span> 
                                 </div>
+                                
+                                )}
+
 
                               </div>
                             </PopoverContent>
