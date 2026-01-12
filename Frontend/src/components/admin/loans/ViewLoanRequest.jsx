@@ -22,11 +22,6 @@ const ViewLoanRequest = () => {
 
   const loan = loans?.find(loan => loan?._id == loanId)
 
-  console.log(loan)
-
-  console.log(loan?.userId?.Name)
-
-
   const statusStyles = {
     pending: "bg-yellow-500 text-white",
     approved: "bg-green-500 text-white",
@@ -38,7 +33,6 @@ const ViewLoanRequest = () => {
     {icon: <X className="w-4 h-4" /> , text: "Reject" , loadingText: "Rejecting" },
   ]
 
-
   // Here, we need to create a helper function to implement every field in this API with loader:
 
   const Field = ({ loading, value }) => {
@@ -47,7 +41,7 @@ const ViewLoanRequest = () => {
     return <p className="font-medium">{value}</p>;
 
   }
-
+           
   return (
     <div className="flex flex-col gap-8">
 
@@ -56,7 +50,7 @@ const ViewLoanRequest = () => {
         <div>
           <h1 className="text-2xl font-semibold text-primary-black">
             Loan Application Details
-          </h1>
+          </h1>                
           <p className="text-sm text-gray-600">
             Review complete information related to this loan request of <span className="text-[#024D9A] font-semibold" > {loan?.userId?.Name} </span>.
           </p>
@@ -74,9 +68,9 @@ const ViewLoanRequest = () => {
                             </PopoverTrigger>
                             <PopoverContent className={"w-fit p-1"}>
                               <div className="flex items-start  flex-col justify-center gap-2 p-0">
-                                {loanStatus?.map(status => 
+                                {loanStatus?.map((status , index) => 
 
-                                <div className='flex gap-2 items-center cursor-pointer px-2 py-1 rounded-lg hover:bg-gray-100' >
+                                <div key={index} className='flex gap-2 items-center cursor-pointer px-2 py-1 rounded-lg hover:bg-gray-100' >
                                   <div>
                                      {status?.icon}                                 
                                   </div>
