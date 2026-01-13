@@ -12,7 +12,7 @@ const ApprovedLoansPageHeader = () => {
         </h1>
         <p className="text-gray-600 text-sm md:text-base">
           View all loans that have been successfully approved by the admin.  
-          Sorted on a First Come, First Serve basis.
+          Sorted on First Come, First Serve basis.
         </p>
       </div>
 
