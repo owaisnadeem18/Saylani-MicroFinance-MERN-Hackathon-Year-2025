@@ -14,8 +14,7 @@ const LoanFormBanner = () => {
                     <img
                         src={saylaniLogo}
                         alt="Saylani"
-                        className="mx-auto w-32 md:w-40" // Adjust width for responsiveness
-                    />
+                        className="mx-auto w-32 md:w-40"/>
                     {/* Heading */}
                     <h1 className="text-3xl sm:text-4xl font-bold text-center text-gray-800 ">
                         Loan Application Form
