@@ -7,15 +7,13 @@ const LoanFormBanner = () => {
         <section className="py-4 md:py-8">
             <div className="max-w-4xl mx-auto text-center">
 
-
                 <div className='flex flex-col gap-2 justify-center' >
 
                     {/* Logo */}
                     <img
                         src={saylaniLogo}
                         alt="Saylani"
-                        className="mx-auto w-32 md:w-40" // Adjust width for responsiveness
-                    />
+                        className="mx-auto w-32 md:w-40"/>
                     {/* Heading */}
                     <h1 className="text-3xl sm:text-4xl font-bold text-center text-gray-800 ">
                         Loan Application Form
