@@ -11,7 +11,7 @@ const AdminDashboard = () => {
 
       {/* Subtitle */}
       <p className="text-gray-600 text-lg">
-        Here you can manage all loans, users, and track overall system statistics.
+        Here you can manage all loans, users, & track overall system statistics.
       </p>
 
       {/* Stats Section */}
