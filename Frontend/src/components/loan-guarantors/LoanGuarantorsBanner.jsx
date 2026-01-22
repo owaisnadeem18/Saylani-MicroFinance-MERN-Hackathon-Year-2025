@@ -4,7 +4,7 @@ import { Badge } from "../ui/badge";
 const LoanGuarantorsBanner = () => {
   return (
     <div  >
-    <div className="bg-blue-50 flex flex-col gap-5 rounded-xl shadow-md p-8 text-center max-w-4xl mx-auto ">
+    <div className="bg-blue-50 flex flex-col gap-5 rounded-xl shadow-md p-8 text-center max-w-4xl mx-auto">
       {/* Heading */}
       <h1 className="text-3xl font-bold text-blue-700">
         Step 2: Guarantor Details
@@ -38,7 +38,6 @@ const LoanGuarantorsBanner = () => {
         </p>
       </div>
     </div>        
-
     </div>
   );
 };
