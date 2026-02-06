@@ -46,9 +46,9 @@ const AdminSidebar = () => {
   } , [dispatch])
 
   return (
-    <div className={`transition-all ease-in-out duration-500 flex-none ${menu ? "w-full lg:w-[300px]" : "w-16 md:w-20"} text-white`} >
+    <div className={`transition-all ease-in-out duration-500 flex-none ${menu ? "w-[300px]" : "w-16 md:w-20"} text-white`} >
     <div
-      className={`transition-all ease-in-out duration-500 h-dvh fixed  top-0 left-0 bg-[#024D9A] ${menu ? "w-full lg:w-[300px]" : "w-16 md:w-20"
+      className={`transition-all ease-in-out duration-500 h-dvh fixed  top-0 left-0 bg-[#024D9A] ${menu ? "w-[300px]" : "w-16 md:w-20"
         }`} >
       <div className='absolute flex mx-auto top-0 left-0  right-0 bottom-0 my-auto  h-full w-full' >
 

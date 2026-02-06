@@ -11,7 +11,7 @@ const AdminLayout = () => {
   return (
     <div className="flex min-h-screen">
 
-      <div className={`transition-all ease-in-out duration-500 flex-none ${menu ? "w-full lg:w-[300px]" : "w-16 md:w-20"} bg-[#024D9A] text-white`} >
+      <div className={`transition-all ease-in-out duration-500 flex-none ${menu ? "w-16 lg:w-[300px]" : "w-16 md:w-20"} bg-[#024D9A] text-white`} >
         <AdminSidebar/>
       </div>
 
