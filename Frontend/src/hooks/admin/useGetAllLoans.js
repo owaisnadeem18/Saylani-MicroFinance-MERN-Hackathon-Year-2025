@@ -16,6 +16,7 @@ const useGetAllLoans = () => {
       const res = await axios.get(`http://localhost:5000/api/admin/loans` , {headers: {"Authorization" : `Bearer ${token}`}}) 
       console.log("Users get API of loans is => " , res)
 
+
       setLoans(res?.data?.loans)
 
     }

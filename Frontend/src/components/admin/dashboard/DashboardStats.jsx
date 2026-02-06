@@ -12,6 +12,8 @@ const DashboardStats = () => {
 
     // From the API result we have to get the values and put in the data:
 
+    console.log(loans)
+
     const totalLoans = loans.length
 
     const approvedLoans = loans?.filter(loan => loan?.status.toLowerCase == "approved").length
