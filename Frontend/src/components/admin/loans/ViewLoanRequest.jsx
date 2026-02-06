@@ -5,22 +5,32 @@ import useGetAllLoans from "@/hooks/admin/useGetAllLoans";
 import { useParams } from "react-router-dom";
 import { Spinner } from "@/components/ui/spinner";
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
+import useUpdateStatus from "@/hooks/admin/useUpdateStatus";
 
 const ViewLoanRequest = () => {
 
   // Here, we just simply need to call the custom hook in order to get all the APIs:
-
-  const { loans, loading } = useGetAllLoans()
-
-  // Here , we need to call another hook to accept or reject the loan application: 
-  // const
   
+  const { loans, loading } = useGetAllLoans()
+  
+  const { updateLoanStatus } = useUpdateStatus();
+  
+    // Here , we need to call another hook to accept or reject the loan application: 
+    // const
+    
+  
+    const params = useParams()
+  
+    const loanId = params.id
+  
+    const loan = loans?.find(loan => loan?._id == loanId)
 
-  const params = useParams()
-
-  const loanId = params.id
-
-  const loan = loans?.find(loan => loan?._id == loanId)
+  
+const handleStatusChange = async (newStatus) => {
+  alert(`Are you sure you want to ${newStatus} this loan application?`);
+  await updateLoanStatus(loan._id, newStatus);
+};
+           
 
   const statusStyles = {
     pending: "bg-yellow-500 text-white",
@@ -29,8 +39,8 @@ const ViewLoanRequest = () => {
   };
 
   const loanStatus = [
-    {icon: <CheckIcon className="w-4 h-4" /> , text: "Accept" , loadingText: "Accepting" },
-    {icon: <X className="w-4 h-4" /> , text: "Reject" , loadingText: "Rejecting" },
+    {icon: <CheckIcon className="w-4 h-4" /> , text: "Accept"  , value: "approved" , loadingText: "Accepting" },
+    {icon: <X className="w-4 h-4" /> , text: "Reject" , value: "rejected"  , loadingText: "Rejecting" },
   ]
 
   // Here, we need to create a helper function to implement every field in this API with loader:
@@ -41,8 +51,12 @@ const ViewLoanRequest = () => {
     return <p className="font-medium">{value}</p>;
 
   }
-           
+
+
   return (
+
+    
+
     <div className="flex flex-col gap-8">
 
       {/* ===== PAGE HEADER ===== */}
@@ -70,7 +84,7 @@ const ViewLoanRequest = () => {
                               <div className="flex items-start  flex-col justify-center gap-2 p-0">
                                 {loanStatus?.map((status , index) => 
 
-                                <div key={index} className='flex gap-2 items-center cursor-pointer px-2 py-1 rounded-lg hover:bg-gray-100' >
+                                <div onClick={() => handleStatusChange(status?.value)} key={index} className='flex gap-2 items-center cursor-pointer px-2 py-1 rounded-lg hover:bg-gray-100' >
                                   <div>
                                      {status?.icon}                                 
                                   </div>
